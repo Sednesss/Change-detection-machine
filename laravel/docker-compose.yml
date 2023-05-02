@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  nginx:
+  nginx-cdm:
     image: nginx:latest
     volumes:
       - ./:/var/www
@@ -10,7 +10,9 @@ services:
       - "8876:80"
     depends_on:
       - app
-    container_name: app_nginx
+    container_name: nginx-cdm
+    networks:
+      - cdm
 
   app:
     build:
@@ -21,6 +23,8 @@ services:
     depends_on:
       - mysql
     container_name: app
+    networks:
+      - cdm
   
   mysql:
     image: mysql/mysql-server:8.0.23
@@ -30,9 +34,15 @@ services:
     environment:
         MYSQL_DATABASE: change_detection_machine
         MYSQL_ROOT_PASSWORD: root
-        MYSQL_PASSWORD: root
-        MYSQL_USER: root
+        MYSQL_PASSWORD: 1234
+        MYSQL_USER: cdm
     ports:
       - 8101:3306
+    networks:
+      - cdm
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     container_name: mysql
+
+networks:
+  cdm:
+    driver: bridge
