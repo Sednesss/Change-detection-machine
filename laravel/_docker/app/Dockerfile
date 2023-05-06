@@ -23,3 +23,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
     --install-dir=/usr/local/bin
 
 WORKDIR /var/www
+
+COPY ./composer.json ./composer.lock /var/www/
+RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer
