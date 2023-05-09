@@ -1,0 +1,253 @@
+@font-face {
+    font-family: 'SFUIDysplay';
+    src: url('/fonts/sfuidisplay_bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mont';
+    src: url('/fonts/mont_extralightdemo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header-section {
+    position: absolute;
+    height: 130px;
+    left: 0px;
+    top: 0px;
+}
+
+.header-section .header-menu-section {
+    position: absolute;
+    height: 62px;
+    left: 170px;
+    top: 29px;
+}
+
+.header-section .header-menu-section .header-menu-logo-section img {
+    height: 62px;
+}
+
+.background-section .background-first-section img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 700px;
+}
+
+.background-section .background-second-section img {
+    position: absolute;
+    height: 375px;
+    right: 0px;
+    bottom: 50px;
+}
+
+.background-section .background-text-section {
+    top: 18%;
+    position: absolute;
+    left: 37%;
+    right: 32%;
+}
+
+.background-section .background-text-section .background-text-up-section {
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 129%;
+
+    background: linear-gradient(180deg, #1B18F9 0%, #1B18F9 46.35%, #E146AD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.background-section .background-text-section .background-text-down-section {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 171.5%;
+
+    color: #454545;
+}
+
+.input-data-form-section {
+    position: absolute;
+    width: 350px;
+    /* height: 530px; */
+    left: 170px;
+    top: 145px;
+
+    background: #FBFBFB;
+    border-radius: 9px;
+}
+
+.input-data-form-section .input-data-form-header-section img {
+    display: inline-block;
+    width: 28px;
+    margin-top: 20px;
+}
+
+.input-data-form-section .input-data-form-header-section .input-data-form-header-text-up-section {
+    display: inline-block;
+    margin: 10px;
+
+    margin-left: 5%;
+    margin-right: 10px;
+
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 25px;
+
+    color: #292731;
+}
+
+.input-data-form-section .input-data-form-header-section .input-data-form-header-text-down-section {
+    width: 89%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+
+    font-weight: 600;
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 16px;
+}
+
+.input-data-form-section .input-data-form-input-field-section {
+    margin-top: 10px;
+}
+
+.input-data-form-section .input-data-form-input-field-section label {
+    margin-left: 17.5px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #455360;
+}
+
+.input-data-form-section .input-data-form-input-field-section input[type="text"],
+.input-data-form-section .input-data-form-input-field-section input[type="email"],
+.input-data-form-section .input-data-form-input-field-section input[type="password"] {
+    height: 32px;
+    width: 89%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5px;
+
+
+    background: #EAEAEA;
+    border-radius: 4px;
+    border-style: none;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.input-data-form-section .input-data-form-switch-section {
+    margin-top: 10px;
+}
+
+.input-data-form-section .input-data-form-switch-section label a {
+    margin-left: 17.5px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+
+    color: #66BCE8;
+}
+
+.input-data-form-section .input-data-form-switch-section .input-data-form-switch-btn-section {
+    display: inline-block;
+    top: 5px;
+    left: 10px;
+    width: 40px;
+    height: 20px;
+    border-radius: 19px;
+    background: #bfbfbf;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 300ms;
+}
+
+.input-data-form-section .input-data-form-switch-section .input-data-form-switch-btn-section::after {
+    content: "";
+    height: 15px;
+    width: 15px;
+    border-radius: 17px;
+    background: #fff;
+    top: 2.5px;
+    left: 3px;
+    transition-duration: 300ms;
+    position: absolute;
+    z-index: 1;
+}
+
+.input-data-form-section .input-data-form-switch-section .switch-on {
+    background: #118c4e;
+}
+
+.input-data-form-section .input-data-form-switch-section .switch-on::after {
+    left: 22px;
+}
+
+.input-data-form-section .input-data-form-button-section button {
+    margin-top: 15px;
+    margin-left: 5%;
+    width: 89%;
+    height: 42px;
+
+    background: #4C70FF;
+    border-radius: 8px;
+    border-style: none;
+
+    color: #FFFFFF;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.input-data-form-section .input-data-form-button-section button:hover {
+    background: rgba(224, 245, 245, 0);
+    color: #3a7999;
+    box-shadow: inset 0 0 0 1px #3a7999;
+    transition-duration: 200ms;
+}
+
+.input-data-form-section .input-data-form-redirect-section {
+    margin-top: 12px;
+    margin-bottom: 15px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #292731;
+    text-align: center;
+}
+
+.input-data-form-section .input-data-form-redirect-section a {
+    color: #66BCE8;
+}
