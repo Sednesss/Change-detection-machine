@@ -12,7 +12,7 @@
         </div>
         <img src="{{ asset('img/CDM/Auth/auth_Icon_hand.png') }}" alt="">
         <div class="input-data-form-header-text-down-section">
-            Пожалуйста, зайдите в свой аккаунт
+            Пожалуйста, войдите в свой аккаунт
         </div>
     </div>
 
@@ -37,4 +37,9 @@
 
     </form>
 </div>
+@endsection
+
+@section('background')
+    @parent
+    Авторизуйтесь
 @endsection

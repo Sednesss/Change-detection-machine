@@ -12,7 +12,7 @@
         </div>
         <img src="{{ asset('img/CDM/Auth/auth_Icon_hand.png') }}" alt="">
         <div class="input-data-form-header-text-down-section">
-            Пожалуйста, зайдите в свой аккаунт
+            Пожалуйста, заполните форму
         </div>
     </div>
 
@@ -39,7 +39,7 @@
             <div id="switch-btn" class="input-data-form-switch-btn-section"></div>
         </div>
         <div class="input-data-form-button-section">
-            <button type="submit">Войти</button>
+            <button type="submit">Продолжить</button>
         </div>
         <div class="input-data-form-redirect-section">
             Есть аккаунт?
@@ -48,4 +48,9 @@
 
     </form>
 </div>
+@endsection
+
+@section('background')
+    @parent
+    Создайте аккаунт
 @endsection
