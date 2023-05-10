@@ -8,7 +8,7 @@
 
     <head>
         <link rel="stylesheet" href="{{ asset('css/CDM/Auth/styles.css') }}">
-        <script src="{{ asset('js/CDM/Auth/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/CDM/Auth/script.js') }}"></script>
     </head>
     <title>@yield('title')</title>

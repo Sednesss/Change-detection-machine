@@ -24,4 +24,5 @@ Route::get('/site/rules', [\App\Http\Controllers\CDM\PageController::class, 'rul
 Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     Route::post('/register', [\App\Http\Controllers\CDM\UserController::class, 'register'])->name('register');
     Route::post('/authenticate', [\App\Http\Controllers\CDM\UserController::class, 'authenticate'])->name('authenticate');
+    Route::get('/logout', [\App\Http\Controllers\CDM\UserController::class, 'logout'])->name('logout');
 });
