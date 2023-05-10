@@ -18,7 +18,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $name,
             'email' => $email,
-            'password' => $password
+            'password' => bcrypt($password)
         ]);
 
         Auth::login($user);
@@ -35,12 +35,14 @@ class UserController extends Controller
             'email' => $email,
             'password' => $password
         ])) {
+            $user = Auth::user();
+            Auth::login($user);
+
             return redirect()->route('home');
         } else {
             return back()->withErrors([
                 'email' => 'Неверный email или пароль',
             ]);
         }
-
     }
 }

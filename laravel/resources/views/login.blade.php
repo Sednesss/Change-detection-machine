@@ -20,7 +20,7 @@
         @csrf
         <div class="input-data-form-input-field-section">
             <label for="email">Адрес электронной почты</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" autocomplete="email" required>
         </div>
         <div class="input-data-form-input-field-section">
             <label for="password">Пароль</label>
@@ -31,7 +31,7 @@
             <button type="submit">Войти</button>
         </div>
         <div class="input-data-form-redirect-section">
-            <label for="switch-btn">Нет аккаунта?</label>
+            Нет аккаунта?
             <a href="{{ route('register') }}">Зарегистрироваться</a>
         </div>
 
