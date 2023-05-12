@@ -108,3 +108,87 @@
     box-shadow: inset 0 0 0 1px #3a7999;
     transition-duration: 200ms;
 }
+
+.content-section {
+    margin-left: 162px;
+    margin-right: 162px;
+}
+
+.content-section .content-project-info-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section {
+    font-family: 'Mont';
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section .content-project-info-2-text-section .content-project-info-2-text-up-section {
+    font-family: 'Mont';
+    font-weight: 900;
+    font-size: 50px;
+    line-height: 100px;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section .content-project-info-2-text-section .content-project-info-2-text-down-section {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section .content-project-info-2-links-section {
+    margin-top: 25px;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section .content-project-info-2-links-section a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background: #5454D4;
+    border-radius: 7px;
+
+    font-weight: 700;
+    font-size: 20px;
+    border-style: none;
+    text-decoration: none;
+
+    color: #FFFFFF;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section .content-project-info-2-links-section a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background: #5454D4;
+    border-radius: 7px;
+
+    font-weight: 700;
+    font-size: 20px;
+    border-style: none;
+    text-decoration: none;
+
+    color: #FFFFFF;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section .content-project-info-2-links-section a:hover {
+    background: rgba(224, 245, 245, 0);
+    color: #3a7999;
+    box-shadow: inset 0 0 0 1px #3a7999;
+    transition-duration: 200ms;
+}
+
+.content-section .content-project-info-section .content-project-info-2-section {
+    width: 50%;
+}
+
+.content-section .content-project-info-section .content-project-info-2-image-section img {
+    width: 600px;
+    display: block;
+    margin: 0 auto;
+}

@@ -5,17 +5,14 @@
             <a href="{{ route('home') }}"><img src="{{ asset('img/CDM/App/logo.png') }}" alt=""></a>
         </div>
         <div class="header-menu-elements-section">
-            @foreach($menu as $element_menu)
-            <a href="{{ route('home') }}">{{ $element_menu }}</a>
+            @foreach($menu as $title => $link)
+            <a href="{{ route($link) }}">{{ $title }}</a>
             @endforeach
         </div>
         <div class="header-menu-auth-section">
-            @if (Auth::check())
-            <a href="{{ route('users.logout') }}">Выйти</a>
-            @else
-            <a href="{{ route('login') }}">Войти</a>
-            @endif
-
+            @foreach($auth_button as $title => $link)
+            <a href="{{ route($link) }}">{{ $title }}</a>
+            @endforeach
         </div>
     </div>
 </div>
