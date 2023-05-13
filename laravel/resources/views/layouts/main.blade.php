@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('css/CDM/App/styles.css') }}">
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/CDM/App/script.js') }}"></script>
+        @stack('styles')
     </head>
     <title>@yield('title')</title>
 </head>

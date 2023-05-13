@@ -28,11 +28,17 @@ Route::get('/site/rules', [\App\Http\Controllers\CDM\PageController::class, 'rul
 Route::get('/profile', [\App\Http\Controllers\CDM\PageController::class, 'profile'])->name('profile');
 Route::get('/projects', [\App\Http\Controllers\CDM\PageController::class, 'projects'])->name('projects');
 Route::get('/projects/create', [\App\Http\Controllers\CDM\PageController::class, 'projectCreate'])->name('projects.create');
-Route::get('/projects/{project_slug}', [\App\Http\Controllers\CDM\PageController::class, 'project'])->name('project');
+Route::get('/projects/{slug}', [\App\Http\Controllers\CDM\PageController::class, 'project'])->name('project');
 
 //routes
 Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     Route::post('/register', [\App\Http\Controllers\CDM\UserController::class, 'register'])->name('register');
     Route::post('/authenticate', [\App\Http\Controllers\CDM\UserController::class, 'authenticate'])->name('authenticate');
     Route::get('/logout', [\App\Http\Controllers\CDM\UserController::class, 'logout'])->name('logout');
+});
+
+Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
+    Route::group(['prefix' => 'projects', 'as' => 'projects.'], function () {
+        Route::post('create', [\App\Http\Controllers\CDM\ProjectController::class, 'create'])->name('create');
+    });
 });

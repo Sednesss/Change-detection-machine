@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/CDM/App/pages/home.css') }}">
+@endpush
+
 @section('title')
 CDMachine
 @endsection
@@ -30,3 +34,4 @@ CDMachine
 <div class="content-section-news"></div>
 
 @endsection
+

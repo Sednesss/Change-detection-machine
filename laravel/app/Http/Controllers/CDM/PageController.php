@@ -2,36 +2,26 @@
 
 namespace App\Http\Controllers\CDM;
 
+use App\Helpers\App\MenuHelper;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
     public function home()
     {
-        $menu = [
-            'Главная' => 'home',
-            'Личный кабинет' => 'profile',
-            'Мои проекты' => 'projects',
-            'О нас' => 'about',
-            'Связаться с нами' => 'connect'
-        ];
+        $is_auth_user = Auth::check();
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
 
-        $auth_button = ['Выйти' => 'users.logout'];
         $home_button = ['Создать новый проект' => 'projects.create'];
 
-        if (!Auth::check()) {
-            array_splice($menu, 1, 2);
-            $auth_button = ['Войти' => 'login'];
+        if (!$is_auth_user) {
             $home_button = ['Начать работу' => 'register'];
         }
 
-        $content = [
-            'menu' => $menu,
-            'auth_button' => $auth_button,
-            'home_button' => $home_button
-        ];
+        $content = $menu;
+        $content['home_button'] = $home_button;
 
         return view('home', $content);
     }
@@ -63,21 +53,50 @@ class PageController extends Controller
 
     public function profile()
     {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+        
         return view('profile');
     }
 
     public function projects()
     {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
         return view('projects');
     }
 
     public function projectCreate()
     {
-        return view('project-create');
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        return view('project-create', $content);
     }
 
-    public function project()
+    public function project($slug)
     {
-        return view('project');
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        $project = Project::where('slug', $slug)->first();
+        $content['project'] = $project;
+
+        return view('project', $content);
     }
 }
