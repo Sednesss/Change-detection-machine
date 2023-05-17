@@ -1,0 +1,95 @@
+.project {}
+
+.project .project-title {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 20px;
+    margin-bottom: 15px;
+}
+
+.project .project-type {
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 15px;
+    color: #9f9f9f;
+}
+
+.project .project-properties {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project .project-properties .project-properties-element {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 15px;
+}
+
+
+.map-section {
+    margin-bottom: 30px;
+    height: 420px;
+    width: 100%;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.satellite-images {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.satellite-images .satellite-images-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.satellite-images .satellite-images-header .satellite-images-header-title {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 20px;
+}
+
+.satellite-images .satellite-images-header .satellite-images-header-button a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    border-radius: 7px;
+
+    background: #FFFFFF;
+    border: solid #0025B8 1px;
+    color: #0025B8;
+
+    text-decoration: none;
+}
+
+.satellite-images .satellite-images-header .satellite-images-header-button a:hover {
+    background: #efefef;
+    border-color: #051a6f;
+    color: #051a6f;
+    transition-duration: 200ms;
+}

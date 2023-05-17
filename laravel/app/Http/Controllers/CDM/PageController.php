@@ -68,7 +68,14 @@ class PageController extends Controller
             return redirect()->route('home');
         }
 
-        return view('projects');
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        $projects = Auth::user()->projects;
+        $content['projects'] = $projects;
+        $content['table_header_buttons'] = ['Добавить проект' => 'projects.create'];
+        
+        return view('projects', $content);
     }
 
     public function projectCreate()
@@ -96,7 +103,33 @@ class PageController extends Controller
 
         $project = Project::where('slug', $slug)->first();
         $content['project'] = $project;
+        $content['global_value_project_map_center_x'] = $project->map_center_x;
+        $content['global_value_project_map_center_y'] = $project->map_center_y;
+        $content['global_value_project_data_max'] = $project->data_max;
+        $content['global_value_project_data_min'] = $project->data_min;
+        $content['global_value_project_data_start'] = $project->data_start;
+        $content['global_value_project_data_end'] = $project->data_end;
+        $content['global_value_project_status'] = $project->status;
+
+        $content['table_images_buttons'] = ['Добавить снимок' => 'projects.images.create'];
 
         return view('project', $content);
+    }
+
+    public function satelliteImageCreate($slug)
+    {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        $project = Project::where('slug', $slug)->first();
+
+        $content['project'] = $project;
+
+        return view('satellite-images-create', $content);
     }
 }

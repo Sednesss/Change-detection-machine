@@ -29,6 +29,8 @@ Route::get('/profile', [\App\Http\Controllers\CDM\PageController::class, 'profil
 Route::get('/projects', [\App\Http\Controllers\CDM\PageController::class, 'projects'])->name('projects');
 Route::get('/projects/create', [\App\Http\Controllers\CDM\PageController::class, 'projectCreate'])->name('projects.create');
 Route::get('/projects/{slug}', [\App\Http\Controllers\CDM\PageController::class, 'project'])->name('project');
+Route::get('/projects/{slug}/satellite-images/create', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImageCreate'])->name('projects.images.create');
+
 
 //routes
 Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
@@ -40,5 +42,7 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
 Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
     Route::group(['prefix' => 'projects', 'as' => 'projects.'], function () {
         Route::post('create', [\App\Http\Controllers\CDM\ProjectController::class, 'create'])->name('create');
+        Route::post('update', [\App\Http\Controllers\CDM\ProjectController::class, 'update'])->name('update');
+        Route::post('delete', [\App\Http\Controllers\CDM\ProjectController::class, 'delete'])->name('delete');
     });
 });

@@ -15,11 +15,24 @@ class Project extends Model
         'user_id',
         'name',
         'slug',
-        'type'
+        'type',
+        'status',
+        'map_center_x',
+        'map_center_y',
+        'data_max',
+        'data_min',
+        'data_start',
+        'data_end',
+        'intersection_area',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function satelliteImage()
+    {
+        return $this->hasMany(Project::class);
     }
 }

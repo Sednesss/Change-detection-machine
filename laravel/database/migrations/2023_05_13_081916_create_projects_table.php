@@ -16,10 +16,18 @@ return new class extends Migration
 
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            
-            $table->string('name'); 
+
+            $table->string('name');
             $table->string('slug');
-            $table->string('type');           
+            $table->string('type');
+            $table->string('status')->default('creadted');
+            $table->float('map_center_x')->nullable();
+            $table->float('map_center_y')->nullable();
+            $table->date('data_max')->nullable();
+            $table->date('data_min')->nullable();
+            $table->date('data_start')->nullable();
+            $table->date('data_end')->nullable();
+            $table->json('intersection_area')->nullable();
 
             $table->timestamps();
         });

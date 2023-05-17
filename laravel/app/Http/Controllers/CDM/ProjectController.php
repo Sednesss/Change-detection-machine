@@ -10,20 +10,6 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
-    public function list()
-    {
-        Project::all();
-
-        // return redirect()->route('home');
-    }
-
-    // public function get($slug)
-    // {
-    //     Project::where('slug', $slug)->first();
-
-    //     // return redirect()->route('home');
-    // }
-
     public function create(Request $request)
     {
         $slug = Str::slug($request['name']);
@@ -32,7 +18,9 @@ class ProjectController extends Controller
             'user_id' => Auth::user()->id,
             'name' => $request['name'],
             'slug' => $slug,
-            'type' => $request['type']
+            'type' => $request['type'],
+            'map_center_x' => 86.12,
+            'map_center_y' => 70.20
         ]);
 
         return redirect()->route('project', ['slug' => $slug]);
@@ -40,8 +28,8 @@ class ProjectController extends Controller
 
     public function update(Request $request)
     {
+        $project = Project::where('slug', $request['slug'])->first();
         $slug = Str::slug($request['name']);
-        $project = Project::where('slug', $slug)->first();
 
         $project->name = $request['name'];
         $project->slug = $slug;
@@ -49,15 +37,14 @@ class ProjectController extends Controller
 
         $project->save();
 
-        // return redirect()->route('home');
+        return redirect()->route('project', ['slug' => $slug]);
     }
 
     public function delete(Request $request)
     {
-        $slug = Str::slug($request['name']);
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::where('slug', $request['slug'])->first();
         $project->delete();
 
-        // return redirect()->route('home');
+        return redirect()->route('projects');
     }
 }
