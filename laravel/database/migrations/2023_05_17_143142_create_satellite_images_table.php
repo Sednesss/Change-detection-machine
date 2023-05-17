@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('type');
-            $table->string('status')->default('creadted');
+            $table->string('status')->default('created');
+            $table->string('colour');
             $table->float('map_center_x')->nullable();
             $table->float('map_center_y')->nullable();
         });

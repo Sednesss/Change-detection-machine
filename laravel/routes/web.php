@@ -30,6 +30,8 @@ Route::get('/projects', [\App\Http\Controllers\CDM\PageController::class, 'proje
 Route::get('/projects/create', [\App\Http\Controllers\CDM\PageController::class, 'projectCreate'])->name('projects.create');
 Route::get('/projects/{slug}', [\App\Http\Controllers\CDM\PageController::class, 'project'])->name('project');
 Route::get('/projects/{slug}/satellite-images/create', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImageCreate'])->name('projects.images.create');
+Route::get('/projects/{project_slug}/satellite-images/{slug}', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImage'])->name('projects.image');
+
 
 
 //routes
@@ -44,5 +46,12 @@ Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
         Route::post('create', [\App\Http\Controllers\CDM\ProjectController::class, 'create'])->name('create');
         Route::post('update', [\App\Http\Controllers\CDM\ProjectController::class, 'update'])->name('update');
         Route::post('delete', [\App\Http\Controllers\CDM\ProjectController::class, 'delete'])->name('delete');
+
+        Route::group(['prefix' => 'satellite-images', 'as' => 'satellite_images.'], function () {
+            Route::post('create', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'create'])->name('create');
+            Route::post('delete', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'delete'])->name('delete');
+            Route::post('update', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'update'])->name('update');
+
+        });
     });
 });

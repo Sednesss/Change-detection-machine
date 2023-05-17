@@ -24,26 +24,26 @@
     @foreach($projects as $project)
     <div class="table-content-element-section">
         <div class="table-content-element-text-section">
-            <a href="{{ route('project', ['slug' => $project->slug]) }}">{{$project->name}}</a>
+            <a href="{{ route('project', ['slug' => $project->slug]) }}">{{ $project->name }}</a>
 
             <div class="table-content-element-text-property-section">
                 <qwerty>Тип спутника:</qwerty>
-                <qwerty-value>{{$project->type}}</qwerty-value>
+                <qwerty-value>{{ $project->type }}</qwerty-value>
             </div>
 
             <div class="table-content-element-text-property-section">
                 <qwerty>Количество снимков</qwerty>
-                <qwerty-value>9</qwerty-value>
+                <qwerty-value>{{ count($project->SatelliteImage) }}</qwerty-value>
             </div>
 
             <div class="table-content-element-text-property-section">
                 <qwerty>Создан:</qwerty>
-                <qwerty-value>{{$project->created_at}}</qwerty-value>
+                <qwerty-value>{{ $project->created_at }}</qwerty-value>
             </div>
 
             <div class="table-content-element-text-property-section">
                 <qwerty>Изменён:</qwerty>
-                <qwerty-value>{{$project->updated_at}}</qwerty-value>
+                <qwerty-value>{{ $project->updated_at }}</qwerty-value>
             </div>
         </div>
         <div class="table-content-element-image-section">

@@ -17,6 +17,7 @@ class SatelliteImage extends Model
         'slug',
         'type',
         'status',
+        'colour',
         'map_center_x',
         'map_center_y',
     ];

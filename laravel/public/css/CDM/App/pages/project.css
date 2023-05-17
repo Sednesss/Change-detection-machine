@@ -1,5 +1,3 @@
-.project {}
-
 .project .project-title {
     font-family: 'Mont';
     font-style: normal;
@@ -91,5 +89,210 @@
     background: #efefef;
     border-color: #051a6f;
     color: #051a6f;
+    transition-duration: 200ms;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-empty {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+
+    text-align: center;
+
+
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 15px;
+
+    background-color: #e5e5e5;
+    border-radius: 8px;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    width: 49%;
+    background-color: #e8e8e8;
+    border-radius: 10px;
+    height: 157px;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .title{
+    margin-left: 30px;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .title a{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 20px;
+    color: #0025B8;
+    
+    text-decoration: none;
+    
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one{
+    margin-left: 10px;
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .date .title{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .date .value{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .colour .title{
+    margin-top: 15px;
+    margin-left: 0px;
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .colour .value{
+    margin-top: 3px;
+    width: 100px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two{
+    width: 35%; 
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two .title{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two .value{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons{
+    width: 30%;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status{
+    margin-bottom: 10px;
+}
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status .title{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status .value{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update{
+    height: 20px;
+    width: 90%;
+    margin-top: 8px;
+    text-decoration: none;
+    border: solid #000b5d 1px;
+    border-radius: 5px;
+    background-color: rgb(193, 195, 251);
+    
+
+    text-align: center;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update:hover{
+    cursor: pointer;
+    border-color: black;
+    color: black;
+    background-color: rgb(255, 255, 255);
+    transition-duration: 200ms;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update a{
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 900;
+    color: #000b5d;
+
+    text-decoration: none;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .delete button{
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 900;
+    color: #5d0000;
+
+    height: 20px;
+    width: 91%;
+    margin-top: 8px;
+    text-decoration: none;
+    border: solid #5d0000 1px;
+    border-radius: 5px;
+    background-color: rgb(251, 193, 193);
+
+    text-decoration: none;
+}
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .delete button:hover{
+    cursor: pointer;
+    border-color: black;
+    color: black;
+    background-color: rgb(255, 255, 255);
     transition-duration: 200ms;
 }

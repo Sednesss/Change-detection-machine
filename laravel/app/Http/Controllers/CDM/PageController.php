@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CDM;
 use App\Helpers\App\MenuHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\SatelliteImage;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
@@ -103,6 +104,7 @@ class PageController extends Controller
 
         $project = Project::where('slug', $slug)->first();
         $content['project'] = $project;
+
         $content['global_value_project_map_center_x'] = $project->map_center_x;
         $content['global_value_project_map_center_y'] = $project->map_center_y;
         $content['global_value_project_data_max'] = $project->data_max;
@@ -112,6 +114,7 @@ class PageController extends Controller
         $content['global_value_project_status'] = $project->status;
 
         $content['table_images_buttons'] = ['Добавить снимок' => 'projects.images.create'];
+        $content['table_images_buttons_element_delete'] = ['Удалить' => 'api.projects.satellite_images.delete'];
 
         return view('project', $content);
     }
@@ -131,5 +134,27 @@ class PageController extends Controller
         $content['project'] = $project;
 
         return view('satellite-images-create', $content);
+    }
+
+    public function satelliteImage($project_slug, $slug)
+    {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        $satellite_image = SatelliteImage::where('slug', $slug)->first();
+
+        $content['satellite_image'] = $satellite_image;
+
+        $content['global_value_satellite_image_map_center_x'] = $satellite_image->map_center_x;
+        $content['global_value_satellite_image_map_center_y'] = $satellite_image->map_center_y;
+        $content['global_value_satellite_image_status'] = $satellite_image->status;
+
+
+        return view('satellite-image', $content);
     }
 }

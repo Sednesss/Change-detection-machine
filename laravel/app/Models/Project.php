@@ -33,6 +33,6 @@ class Project extends Model
 
     public function satelliteImage()
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(SatelliteImage::class);
     }
 }
