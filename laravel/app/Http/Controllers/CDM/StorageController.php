@@ -7,9 +7,9 @@ use App\Models\SatelliteImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class SatelliteImageController extends Controller
+class StorageController extends Controller
 {
-    public function create(Request $request)
+    public function satelliteImageSingleUpluad(Request $request)
     {
         $slug = Str::slug($request['name']);
         $colour = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
@@ -31,25 +31,5 @@ class SatelliteImageController extends Controller
         ];
 
         return redirect()->route('projects.image', $content);
-    }
-
-    public function delete(Request $request)
-    {
-        $satellite_image = SatelliteImage::where('slug', $request['slug'])->first();
-        $satellite_image->delete();
-
-        $project_slug = $satellite_image->project->slug;
-
-        $content = [
-            'slug' => $project_slug
-        ];
-
-        return redirect()->route('project', $content);
-    }
-
-    public function update(Request $request)
-    {
-        // $satellite_image = SatelliteImage::where('slug', $request['slug'])->first();
-        // return redirect()->route('project', $content);
     }
 }

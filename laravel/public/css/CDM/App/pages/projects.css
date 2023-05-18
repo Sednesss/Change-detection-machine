@@ -69,6 +69,11 @@
     width: 70%;
 }
 
+.table-content-section .table-content-element-section .table-content-element-text-section .group{
+    display: flex;
+    flex-direction: row;
+}
+
 .table-content-section .table-content-element-section .table-content-element-text-section a {
     width: 70%;
     margin-left: 40px;
@@ -81,7 +86,28 @@
     text-decoration: none;
 }
 
-.table-content-section .table-content-element-section .table-content-element-text-section .table-content-element-text-property-section {
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-one{
+    width: 50%;
+}
+
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-two{
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-two .title{
+    font-family: 'Mont';
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-two .value{
+    font-family: 'SFUIDysplay';
+}
+
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-one .table-content-element-text-property-section {
     display: flex;
     flex-direction: row;
 
@@ -91,12 +117,12 @@
     font-weight: 600;
 }
 
-.table-content-section .table-content-element-section .table-content-element-text-section .table-content-element-text-property-section qwerty {
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-one .table-content-element-text-property-section qwerty {
     margin-right: 10px;
     margin-top: 15px;
 }
 
-.table-content-section .table-content-element-section .table-content-element-text-section .table-content-element-text-property-section qwerty-value {
+.table-content-section .table-content-element-section .table-content-element-text-section .group .gropu-one .table-content-element-text-property-section qwerty-value {
     margin-right: 10px;
     margin-top: 15px;
 

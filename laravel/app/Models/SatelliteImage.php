@@ -26,4 +26,14 @@ class SatelliteImage extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function boundaryPoint()
+    {
+        return $this->hasMany(BoundaryPoint::class);
+    }
+
+    public function channelEmission()
+    {
+        return $this->hasMany(ChannelEmission::class);
+    }
 }

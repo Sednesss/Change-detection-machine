@@ -1,0 +1,38 @@
+.image .header .title{
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 20px;
+    margin-bottom: 15px;
+}
+.image .header .properties{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.image .header .properties .type{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 15px;
+    color: #9f9f9f;
+}
+.image .header .properties .status{
+    display: flex;
+    flex-direction: row;
+}
+.image .header .properties .status .title{
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 5px;
+}
+.image .header .properties .status .value{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+}

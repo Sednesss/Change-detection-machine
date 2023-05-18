@@ -12,12 +12,25 @@
 @endpush
 
 @section('title')
-{{ $satellite_image['name'] }}
+{{ $satellite_image->name }}
 @endsection
 
 @section('content')
-<div>{{$satellite_image['name']}}</div>
-<div>{{$satellite_image['slug']}}</div>
-<div>{{$satellite_image['type']}}</div>
-
+<div class="image">
+    <div class="header">
+        <div class="title">{{ $satellite_image->name }}</div>
+        <div class="properties">
+            <div class="type">[{{ $satellite_image->type }}]</div>
+            <div class="status">
+                <div class="title">Статус:</div>
+                <div class="value">{{ $satellite_image->status }}</div>
+            </div>
+        </div>
+    </div>
+    @if ($satellite_image->type=='single-channel')
+    @include('includes.App.single-channel-form')
+    @else
+    @include('includes.App.multichannel-form')
+    @endif
+</div>
 @endsection

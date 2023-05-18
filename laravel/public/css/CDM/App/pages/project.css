@@ -18,19 +18,96 @@
 
 .project .project-properties {
     margin-top: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project .project-properties .properties-elements {
     display: flex;
     flex-direction: column;
 }
 
-.project .project-properties .project-properties-element {
+.project .project-properties .properties-elements .properties-element {
     font-family: 'Mont';
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    margin-bottom: 15px;
+
+    display: flex;
+    flex-direction: column;
 }
 
+.project .project-properties .properties-elements .properties-element .prop{
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.project .project-properties .properties-elements .properties-element .prop label{
+    margin-right: 5px;
+}
+
+.project .project-properties .properties-elements .status {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.project .project-properties .properties-elements .status .status-title{
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.project .project-properties .properties-elements .status .status-value{
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.project .project-properties .properties-elements .buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.project .project-properties .properties-elements .buttons a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    margin-left: 8px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    border-radius: 7px;
+
+    background: #FFFFFF;
+    border: solid #0025B8 1px;
+    color: #0025B8;
+
+    text-decoration: none;
+}
+
+.project .project-properties .properties-elements .buttons a:hover {
+    background: #efefef;
+    border-color: #051a6f;
+    color: #051a6f;
+    transition-duration: 200ms;
+}
 
 .map-section {
     margin-bottom: 30px;
@@ -121,44 +198,45 @@
 .satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element {
     margin-top: 10px;
     margin-bottom: 10px;
-    
+
     width: 49%;
     background-color: #e8e8e8;
     border-radius: 10px;
     height: 157px;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .title{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .title {
     margin-left: 30px;
     margin-top: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .title a{
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .title a {
     font-family: 'SFUIDysplay';
     font-style: normal;
     font-size: 20px;
     color: #0025B8;
-    
+
     text-decoration: none;
-    
+
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one {
     margin-left: 10px;
     width: 32%;
     display: flex;
     flex-direction: column;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .date .title{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .date .title {
     margin-top: 0px;
     margin-left: 0px;
     margin-bottom: 3px;
@@ -168,14 +246,14 @@
     font-weight: 600;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .date .value{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .date .value {
     font-family: 'SFUIDysplay';
     font-style: normal;
     font-size: 14px;
     font-weight: 600;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .colour .title{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .colour .title {
     margin-top: 15px;
     margin-left: 0px;
     font-family: 'Mont';
@@ -184,19 +262,20 @@
     font-weight: 600;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .colour .value{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-one .colour .value {
     margin-top: 3px;
     width: 100px;
     height: 20px;
     border-radius: 10px;
+    border: solid 1px;
 }
 
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two{
-    width: 35%; 
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two {
+    width: 35%;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two .title{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two .title {
     margin-top: 0px;
     margin-left: 0px;
     margin-bottom: 3px;
@@ -206,7 +285,7 @@
     font-weight: 600;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two .value{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .properties-two .value {
     font-family: 'SFUIDysplay';
     font-style: normal;
     font-size: 14px;
@@ -215,14 +294,15 @@
 }
 
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons {
     width: 30%;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status {
     margin-bottom: 10px;
 }
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status .title{
+
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status .title {
     margin-top: 0px;
     margin-left: 0px;
     margin-bottom: 3px;
@@ -232,14 +312,14 @@
     font-weight: 600;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status .value{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .status .value {
     font-family: 'SFUIDysplay';
     font-style: normal;
     font-size: 14px;
     font-weight: 600;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update {
     height: 20px;
     width: 90%;
     margin-top: 8px;
@@ -247,12 +327,12 @@
     border: solid #000b5d 1px;
     border-radius: 5px;
     background-color: rgb(193, 195, 251);
-    
+
 
     text-align: center;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update:hover{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update:hover {
     cursor: pointer;
     border-color: black;
     color: black;
@@ -260,7 +340,7 @@
     transition-duration: 200ms;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update a{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .update a {
     font-family: 'Mont';
     font-style: normal;
     font-size: 14px;
@@ -270,7 +350,7 @@
     text-decoration: none;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .delete button{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .delete button {
 
     font-family: 'Mont';
     font-style: normal;
@@ -289,7 +369,7 @@
     text-decoration: none;
 }
 
-.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .delete button:hover{
+.satellite-images .satellite-images-table .satellite-images-table-section .satellite-images-table-element .properties .buttons .delete button:hover {
     cursor: pointer;
     border-color: black;
     color: black;
