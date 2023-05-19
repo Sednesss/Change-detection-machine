@@ -17,9 +17,9 @@ return new class extends Migration
             $table->bigInteger('satellite_image_id')->unsigned();
             $table->foreign('satellite_image_id')->references('id')->on('satellite_images');
 
-            $table->string('channel_number');
+            $table->string('channel_name')->nullable();
             $table->string('filename');
-            $table->string('path');
+            $table->text('path');
             
 
 

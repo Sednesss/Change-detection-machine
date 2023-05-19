@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'yandex_cloud'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,6 +54,16 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
+        ],
+        
+        'yandex_cloud' => [
+            'driver' => 's3',
+            'key' => env('YANDEX_CLOUD_KEY'),
+            'secret' => env('YANDEX_CLOUD_SECRET'),
+            'endpoint' => env('YANDEX_CLOUD_ENDPOINT'),
+            'region' => env('YANDEX_CLOUD_REGION'),
+            'bucket' => env('YANDEX_CLOUD_BUCKET'),
+            'url' => env('YANDEX_CLOUD_URL'),
         ],
 
     ],

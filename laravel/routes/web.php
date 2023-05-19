@@ -32,8 +32,6 @@ Route::get('/projects/{slug}', [\App\Http\Controllers\CDM\PageController::class,
 Route::get('/projects/{slug}/satellite-images/create', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImageCreate'])->name('projects.images.create');
 Route::get('/projects/{project_slug}/satellite-images/{slug}', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImage'])->name('projects.image');
 
-
-
 //routes
 Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     Route::post('/register', [\App\Http\Controllers\CDM\UserController::class, 'register'])->name('register');
@@ -52,6 +50,8 @@ Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
             Route::post('delete', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'delete'])->name('delete');
             Route::post('update', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'update'])->name('update');
 
+            Route::post('upload-single', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImagesSingleUpluad'])->name('upload.single');
+            Route::post('upload-multi', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImageMultiUpluad'])->name('upload.multi');
         });
     });
 });
