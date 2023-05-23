@@ -91,6 +91,8 @@ class StorageController extends Controller
             $channel_emission->delete();
         }
 
+        $satellite_image->save();
+        
         ChannelEmission::create([
             'satellite_image_id' => $satellite_image->id,
             'filename' => $file_upload_name,
@@ -124,6 +126,8 @@ class StorageController extends Controller
         foreach($satellite_image->channelEmission as $channel_emission){
             $channel_emission->delete();
         }
+
+        $satellite_image->save();
 
         ChannelEmission::create([
             'satellite_image_id' => $satellite_image->id,
