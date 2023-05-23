@@ -50,8 +50,10 @@ Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
             Route::post('delete', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'delete'])->name('delete');
             Route::post('update', [\App\Http\Controllers\CDM\SatelliteImageController::class, 'update'])->name('update');
 
-            Route::post('upload-single', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImagesSingleUpluad'])->name('upload.single');
+            Route::post('upload-single', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImageSingleUpluad'])->name('upload.single');
             Route::post('upload-multi', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImageMultiUpluad'])->name('upload.multi');
+            Route::post('update-single', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImageSingleUpdate'])->name('update.single');
+            Route::post('update-multi', [\App\Http\Controllers\CDM\StorageController::class, 'satelliteImageMultiUpdate'])->name('update.multi');
         });
     });
 });

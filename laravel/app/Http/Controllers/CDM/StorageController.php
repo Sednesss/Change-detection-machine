@@ -29,10 +29,17 @@ class StorageController extends Controller
             'path' => $file_upload_path
         ]);
 
-        // return redirect()->route('projects.image', $content);
+        // $satellite_image->statu = 'coordinate calculation';
+        // $satellite_image->save();
+
+        $content = [
+            'slug' => $satellite_image->slug,
+            'project_slug' => $satellite_image->project->slug
+        ];
+        return redirect()->route('projects.image', $content);
     }
     
-    public function satelliteImagesSingleUpluad(Request $request)
+    public function satelliteImageSingleUpluad(Request $request)
     {
         $file_upload_green = $request->file('green');
         $file_upload_green_name = $file_upload_green->getClientOriginalName();
@@ -48,18 +55,97 @@ class StorageController extends Controller
 
         ChannelEmission::create([
             'satellite_image_id' => $satellite_image->id,
-            'channel_number' => 'Green',
+            'channel_name' => 'Green',
             'filename' => $file_upload_green_name,
             'path' => $file_upload_green_path
         ]);
 
         ChannelEmission::create([
             'satellite_image_id' => $satellite_image->id,
-            'channel_number' => 'NIR',
+            'channel_name' => 'NIR',
             'filename' => $file_upload_nir_name,
             'path' => $file_upload_nir_path
         ]);
 
-        // return redirect()->route('projects.image', $content);
+        // $satellite_image->statu = 'coordinate calculation';
+        // $satellite_image->save();
+
+        $content = [
+            'slug' => $satellite_image->slug,
+            'project_slug' => $satellite_image->project->slug
+        ];
+        return redirect()->route('projects.image', $content);
+    }
+
+    public function satelliteImageMultiUpdate(Request $request)
+    {
+        $file_upload = $request->file('file');
+        $file_upload_name = $file_upload->getClientOriginalName();
+
+        $storage_helper = new StorageHelper();
+        $file_upload_path = $storage_helper->uploadSatelliteImage($file_upload);
+
+        $satellite_image = SatelliteImage::find($request['id']);
+
+        foreach($satellite_image->channelEmission as $channel_emission){
+            $channel_emission->delete();
+        }
+
+        ChannelEmission::create([
+            'satellite_image_id' => $satellite_image->id,
+            'filename' => $file_upload_name,
+            'path' => $file_upload_path
+        ]);
+
+        // $satellite_image->statu = 'coordinate calculation';
+        // $satellite_image->save();
+
+        $content = [
+            'slug' => $satellite_image->slug,
+            'project_slug' => $satellite_image->project->slug
+        ];
+        return redirect()->route('projects.image', $content);
+    }
+
+    public function satelliteImageSingleUpdate(Request $request)
+    {
+        $file_upload_green = $request->file('green');
+        $file_upload_green_name = $file_upload_green->getClientOriginalName();
+
+        $file_upload_nir = $request->file('nir');
+        $file_upload_nir_name = $file_upload_nir->getClientOriginalName();
+
+        $storage_helper = new StorageHelper();
+        $file_upload_green_path = $storage_helper->uploadSatelliteImage($file_upload_green);
+        $file_upload_nir_path = $storage_helper->uploadSatelliteImage($file_upload_nir);
+
+        $satellite_image = SatelliteImage::find($request['id']);
+
+        foreach($satellite_image->channelEmission as $channel_emission){
+            $channel_emission->delete();
+        }
+
+        ChannelEmission::create([
+            'satellite_image_id' => $satellite_image->id,
+            'channel_name' => 'Green',
+            'filename' => $file_upload_green_name,
+            'path' => $file_upload_green_path
+        ]);
+
+        ChannelEmission::create([
+            'satellite_image_id' => $satellite_image->id,
+            'channel_name' => 'NIR',
+            'filename' => $file_upload_nir_name,
+            'path' => $file_upload_nir_path
+        ]);
+
+        // $satellite_image->statu = 'coordinate calculation';
+        // $satellite_image->save();
+
+        $content = [
+            'slug' => $satellite_image->slug,
+            'project_slug' => $satellite_image->project->slug
+        ];
+        return redirect()->route('projects.image', $content);
     }
 }

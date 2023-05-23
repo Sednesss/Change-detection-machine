@@ -1,4 +1,4 @@
-.image .header .title{
+.image .header .title {
     font-family: 'Mont';
     font-style: normal;
     font-weight: 700;
@@ -6,12 +6,14 @@
     line-height: 20px;
     margin-bottom: 15px;
 }
-.image .header .properties{
+
+.image .header .properties {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.image .header .properties .type{
+
+.image .header .properties .type {
     font-family: 'SFUIDysplay';
     font-style: normal;
     font-size: 16px;
@@ -19,20 +21,146 @@
     margin-bottom: 15px;
     color: #9f9f9f;
 }
-.image .header .properties .status{
+
+.image .header .properties .status {
     display: flex;
     flex-direction: row;
 }
-.image .header .properties .status .title{
+
+.image .header .properties .status .title {
     font-family: 'Mont';
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     margin-right: 5px;
 }
-.image .header .properties .status .value{
+
+.image .header .properties .status .value {
     font-family: 'SFUIDysplay';
     font-style: normal;
     font-weight: 600;
     font-size: 17px;
+    font-size: 17px;
+}
+
+.image .form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image .form .form-title {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+
+    width: 60%;
+    margin-bottom: 15px;
+}
+
+.image .form .input {
+    display: flex;
+    flex-direction: column;
+}
+
+.image .form .input .input-row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.image .form .input .input-row .input-data {
+    margin-right: 10px;
+    margin-left: 10px;
+
+    border-radius: 20px;
+    background-color: #d2d2d2;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.image .form .input .input-row .input-data label{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    max-width: 350px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.image .form .input .input-row .input-data input[type=file]::file-selector-button {
+    margin-bottom: 8px;
+    margin-left: 15px;
+    margin-right: 10px;
+
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+.image .form .input .input-row .input-data input[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+}
+
+.image .form .send-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.image .form .send-button button {
+    margin-top: 8px;
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    border-radius: 7px;
+
+    background: #FFFFFF;
+    border: solid #0025B8 1px;
+    color: #0025B8;
+}
+
+.image .form .send-button button:hover {
+    cursor: pointer;
+    background: #efefef;
+    border-color: #051a6f;
+    color: #051a6f;
+    transition-duration: 200ms;
+}
+
+.view .properties{
+    display: flex;
+    flex-direction: row;
+}
+
+.view .properties .files{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
 }

@@ -27,10 +27,22 @@
             </div>
         </div>
     </div>
-    @if ($satellite_image->type=='single-channel')
-    @include('includes.App.single-channel-form')
+    @if (count($satellite_image->channelEmission)==0)
+    <div class="form">
+        @if ($satellite_image->type=='single-channel')
+        @include('includes.App.single-channel-form')
+        @else
+        @include('includes.App.multichannel-form')
+        @endif
+    </div>
     @else
-    @include('includes.App.multichannel-form')
-    @endif
+    <div class="view">
+        @if ($satellite_image->type=='single-channel')
+        @include('includes.App.single-channel-view')
+        @else
+        @include('includes.App.multichannel-view')
+        @endif
+        @endif
+    </div>
 </div>
 @endsection
