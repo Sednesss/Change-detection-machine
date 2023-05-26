@@ -33,3 +33,9 @@ class SqlQueryHelper:
         SET map_center_x = {coordinates['center_point']['x']}, map_center_y = {coordinates['center_point']['y']}
         WHERE id = {satellite_image_id};""")
         self.connection.commit()
+
+    def editStateliteImageStatus(self, satellite_image_id, status):
+        self.cursor.execute(f"""UPDATE satellite_images
+        SET status = {status}
+        WHERE id = {satellite_image_id};""")
+        self.connection.commit()
