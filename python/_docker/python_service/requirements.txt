@@ -1,7 +1,9 @@
 fastapi
 uvicorn
-SQLAlchemy
 requests
 mysql-connector-python
 python-dotenv
-# gdal
+numpy
+gdal
+# yandexcloud
+yandex-s3
