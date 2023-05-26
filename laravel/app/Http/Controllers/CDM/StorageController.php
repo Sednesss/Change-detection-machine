@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CDM;
 
 use App\Helpers\App\StorageHelper;
 use App\Http\Controllers\Controller;
+use App\Jobs\StateliteImage\CalculateCoordinates;
 use App\Models\ChannelEmission;
 use App\Models\SatelliteImage;
 use Illuminate\Http\Request;
@@ -29,8 +30,7 @@ class StorageController extends Controller
             'path' => $file_upload_path
         ]);
 
-        // $satellite_image->statu = 'coordinate calculation';
-        // $satellite_image->save();
+        dispatch(new CalculateCoordinates($satellite_image->id));
 
         $content = [
             'slug' => $satellite_image->slug,
@@ -70,6 +70,8 @@ class StorageController extends Controller
         // $satellite_image->statu = 'coordinate calculation';
         // $satellite_image->save();
 
+        dispatch(new CalculateCoordinates($satellite_image->id));
+        
         $content = [
             'slug' => $satellite_image->slug,
             'project_slug' => $satellite_image->project->slug
