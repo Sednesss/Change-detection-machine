@@ -58,7 +58,7 @@ class PageController extends Controller
         if (!$is_auth_user) {
             return redirect()->route('home');
         }
-        
+
         return view('profile');
     }
 
@@ -75,7 +75,7 @@ class PageController extends Controller
         $projects = Auth::user()->projects;
         $content['projects'] = $projects;
         $content['table_header_buttons'] = ['Добавить проект' => 'projects.create'];
-        
+
         return view('projects', $content);
     }
 
@@ -116,15 +116,19 @@ class PageController extends Controller
         $content['table_images_buttons'] = ['Добавить снимок' => 'projects.images.create'];
         $content['table_images_buttons_element_delete'] = ['Удалить' => 'api.projects.satellite_images.delete'];
 
-        foreach($project->satelliteImage as $satellite_image){
-            foreach($satellite_image->boundaryPoint as $boundary_point){
-                $content['map'][$satellite_image->id][$boundary_point->position] = [
-                    'x' => $boundary_point->x,
-                    'y' => $boundary_point->y
-                ];
+        $content['map'] = null;
+        if (count($project->satelliteImage) != 0) {
+            foreach ($project->satelliteImage as $satellite_image) {
+                foreach ($satellite_image->boundaryPoint as $boundary_point) {
+                    $content['map'][$satellite_image->id][$boundary_point->position] = [
+                        'x' => $boundary_point->x,
+                        'y' => $boundary_point->y
+                    ];
+                }
             }
+            $content['map'] = json_encode($content['map']);
         }
-        $content['map'] = json_encode($content['map']);
+
 
         return view('project', $content);
     }
