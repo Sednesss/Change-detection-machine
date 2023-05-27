@@ -36,6 +36,6 @@ class SqlQueryHelper:
 
     def editStateliteImageStatus(self, satellite_image_id, status):
         self.cursor.execute(f"""UPDATE satellite_images
-        SET status = {status}
+        SET status = '{status}'
         WHERE id = {satellite_image_id};""")
         self.connection.commit()
