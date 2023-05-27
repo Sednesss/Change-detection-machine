@@ -116,6 +116,16 @@ class PageController extends Controller
         $content['table_images_buttons'] = ['Добавить снимок' => 'projects.images.create'];
         $content['table_images_buttons_element_delete'] = ['Удалить' => 'api.projects.satellite_images.delete'];
 
+        foreach($project->satelliteImage as $satellite_image){
+            foreach($satellite_image->boundaryPoint as $boundary_point){
+                $content['map'][$satellite_image->id][$boundary_point->position] = [
+                    'x' => $boundary_point->x,
+                    'y' => $boundary_point->y
+                ];
+            }
+        }
+        $content['map'] = json_encode($content['map']);
+
         return view('project', $content);
     }
 
@@ -146,7 +156,8 @@ class PageController extends Controller
         $menu = (new MenuHelper())->getMenu($is_auth_user);
         $content = $menu;
 
-        $satellite_image = SatelliteImage::where('slug', $slug)->first();
+        $project = Project::where('slug', $project_slug)->first();
+        $satellite_image = SatelliteImage::where('slug', $slug)->where('project_id', $project->id)->first();
 
         $content['satellite_image'] = $satellite_image;
 

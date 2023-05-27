@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "watch": "vite --watch"
     },
     "devDependencies": {
         "axios": "^1.1.2",
@@ -11,6 +12,7 @@
     },
     "dependencies": {
         "@googlemaps/js-api-loader": "^1.15.1",
-        "ol": "^7.3.0"
+        "ol": "^7.3.0",
+        "rbush": "^3.0.1"
     }
 }

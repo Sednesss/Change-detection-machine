@@ -2,8 +2,8 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/CDM/App/pages/project.css') }}">
-<link rel="stylesheet" href="../../../js/ol/ol.css">
-<script src="{{ asset('js/CDM/App/pages/project.js') }}" type="module"></script>
+@vite(['resources/js/components/map.js'])
+@vite(['resources/css/components/map.css'])
 <script>
     var global_value_project_map_center_x = "{{ $global_value_project_map_center_x }}";
     var global_value_project_map_center_y = "{{ $global_value_project_map_center_y }}";
@@ -90,10 +90,16 @@
                     </div>
                     <div class="properties-two">
                         <div class="title">Координаты</div>
-                        <div class="value">12313 213 21312</div>
-                        <div class="value">12313 213 21312</div>
-                        <div class="value">12313 213 21312</div>
-                        <div class="value">12313 213 21312</div>
+                        @if (isset(json_decode($map, true)[$satellite_image->id]))
+                        @foreach(range(1, 4) as $position)
+                        <div class="value">Long: {{ json_decode($map, true)[$satellite_image->id][$position]['x'] }}; Lat: {{ json_decode($map, true)[$satellite_image->id][$position]['y'] }}</div>
+                        @endforeach
+                        @else
+
+                        @foreach(range(1, 4) as $position)
+                        <div class="value">Long: __.__; Lat: __.__</div>
+                        @endforeach
+                        @endif
                     </div>
                     <div class="buttons">
                         <div class="status">
