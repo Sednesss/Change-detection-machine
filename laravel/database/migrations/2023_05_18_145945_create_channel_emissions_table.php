@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->bigInteger('satellite_image_id')->unsigned();
-            $table->foreign('satellite_image_id')->references('id')->on('satellite_images');
+            $table->foreign('satellite_image_id')->references('id')->on('satellite_images')->onDelete('cascade');
 
             $table->string('channel_name')->nullable();
             $table->string('filename');
