@@ -51,12 +51,14 @@ async def index(
         sql_query_helper.addBoundaryPointsStateliteImage(satellite_image_id, coordinates)
         sql_query_helper.editStateliteImageCenter(satellite_image_id, coordinates)
 
+        sql_query_helper.editStateliteImageStatus(satellite_image_id, 'coordinate_calculation')
         return JSONResponse(content={
             'messege': 'Succes',
             'status': True,
             'data': None
         })
     
+    sql_query_helper.editStateliteImageStatus(satellite_image_id, 'error_coordinate_calculation')
     return JSONResponse(content={
         'messege': 'Bad',
         'status': False,
