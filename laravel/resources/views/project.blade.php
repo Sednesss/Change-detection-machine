@@ -2,8 +2,8 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/CDM/App/pages/project.css') }}">
-<link rel="stylesheet" href="../../../js/ol/ol.css">
 @vite(['resources/js/components/map.js'])
+@vite(['resources/css/components/map.css'])
 <script>
     var global_value_project_map_center_x = "{{ $global_value_project_map_center_x }}";
     var global_value_project_map_center_y = "{{ $global_value_project_map_center_y }}";
