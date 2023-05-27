@@ -1,63 +1,105 @@
 import Map from "ol/Map.js";
 import View from "ol/View.js";
 import {
-    fromLonLat
+  fromLonLat
 } from "ol/proj.js";
 import TileLayer from "ol/layer/Tile.js";
 import XYZ from "ol/source/XYZ.js";
-import Polygon from "ol/geom/Polygon.js";
-import VectorLayer from "ol/layer/Vector.js";
+
+import GeoJSON from 'ol/format/GeoJSON';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+
+
+// [34, 81],
+// [61, 81],
+// [34, 78],
+// [61, 78],
+
+// [40, 87],
+// [67, 87],
+// [40, 84],
+// [67, 84],
+// [40, 87]
+
+const styles = [
+  new Style({
+    stroke: new Stroke({
+      color: '#793F56',
+      width: 3,
+    }),
+    fill: new Fill({
+      color: '#793F56' + '50',
+    }),
+  })
+];
+
+const geojsonObject = {
+  'type': 'FeatureCollection',
+  'crs': {
+    'type': 'name',
+    'properties': {
+      'name': 'EPSG:3857',
+    },
+  },
+  'features': [
+    {
+      'type': 'Feature',
+      'geometry': {
+        'type': 'Polygon',
+        'coordinates': [
+          [
+            [340000, 810000],
+            [610000, 810000],
+            [340000, 780000],
+            [600000, 780000],
+            [340000, 810000],
+          ],
+        ],
+      },
+    },
+    {
+      'type': 'Feature',
+      'geometry': {
+        'type': 'Polygon',
+        'coordinates': [
+          [
+            [-2e6, 6e6],
+            [-2e6, 8e6],
+            [0, 8e6],
+            [0, 6e6],
+            [-2e6, 6e6],
+          ],
+        ],
+      },
+    },
+  ],
+};
+
+const source = new VectorSource({
+  features: new GeoJSON().readFeatures(geojsonObject),
+});
+
+const layer = new VectorLayer({
+  source: source,
+  style: styles,
+});
+
 
 // Инициализация карты
 const map = new Map({
-    target: "map",
-    layers: [
-        new TileLayer({
-            source: new XYZ({
-                url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            }),
-        }),
-    ],
-    view: new View({
-        center: fromLonLat([global_value_project_map_center_x, global_value_project_map_center_y]),
-        zoom: 8,
+  target: "map",
+  layers: [
+    new TileLayer({
+      source: new XYZ({
+        url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      }),
     }),
+    layer
+  ],
+  view: new View({
+    center: fromLonLat([global_value_project_map_center_x, global_value_project_map_center_y]),
+    zoom: 8,
+  }),
 });
-
-// Создаем новый слой VectorLayer
-const vectorLayer = new VectorLayer({
-    source: new VectorSource(),
-});
-
-// Создаем два полигона
-const polygon1 = new Polygon([
-    [
-        [10, 10],
-        [100, 10],
-        [100, 100],
-        [10, 100],
-        [10, 10],
-    ],
-]);
-const polygon2 = new Polygon([
-    [
-        [50, 50],
-        [150, 50],
-        [150, 150],
-        [50, 150],
-        [50, 50],
-    ],
-]);
-
-// Добавляем полигоны в источник слоя VectorLayer
-vectorLayer.getSource().addFeatures([
-    new Feature({
-        geometry: polygon1,
-    }),
-    new Feature({
-        geometry: polygon2,
-    }),
-]);
-
-// Добавляем слой VectorLayer в массив слоев карты
-map.addLayer(vectorLayer);
