@@ -30,8 +30,8 @@ console.log(coordinates);
 console.log(colors);
 
 // Определяем проекцию карты и проекцию данных
-const projectionMap = getProjection('WGS_1984');
-const projectionData = getProjection('WGS_1984');
+const string_projection = 'PROJCS["WGS 84 / UTM zone 47N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",99],PARAMETER["scale_factor",0.9996],PARAMETER["false_easting",500000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Easting",EAST],AXIS["Northing",NORTH],AUTHORITY["EPSG","32647"]]'
+const projectionMap = getProjection(string_projection);
 
 const layers = AddPolygon(coordinates, colors);
 
@@ -48,8 +48,8 @@ const map = new Map({
 	target: "map",
 	layers: layers,
 	view: new View({
-		center: [global_value_project_map_center_x, global_value_project_map_center_y],
-		zoom: 5,
+		center: [Number(global_value_project_map_center_x), Number(global_value_project_map_center_y)],
+		zoom: 8,
 		projection: projectionMap,
 	}),
 });
@@ -106,7 +106,7 @@ function AddPolygon(coordinates, colors) {
 
 	for (const key in polygons) {
 		var features = new GeoJSON().readFeatures(polygons[key][1], {
-			dataProjection: projectionData,
+			dataProjection: projectionMap,
 			featureProjection: projectionMap,
 		});
 
