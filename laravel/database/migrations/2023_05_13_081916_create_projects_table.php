@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('type');
-            $table->string('status')->default('creadted');
-            $table->float('map_center_x')->nullable();
-            $table->float('map_center_y')->nullable();
+            $table->string('status')->default('created');
+            $table->bigInteger('map_center_x')->nullable();
+            $table->bigInteger('map_center_y')->nullable();
             $table->date('data_max')->nullable();
             $table->date('data_min')->nullable();
             $table->date('data_start')->nullable();

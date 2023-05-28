@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('satellite_image_id')->references('id')->on('satellite_images');
 
             $table->integer('position');
-            $table->float('x');
-            $table->float('y');
+            $table->bigInteger('x');
+            $table->bigInteger('y');
             
             $table->timestamps();
         });
