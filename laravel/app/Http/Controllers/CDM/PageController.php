@@ -117,6 +117,7 @@ class PageController extends Controller
         $content['table_images_buttons_element_delete'] = ['Удалить' => 'api.projects.satellite_images.delete'];
 
         $content['map'] = null;
+        $content['colors'] = null;
         if (count($project->satelliteImage) != 0) {
             foreach ($project->satelliteImage as $satellite_image) {
                 foreach ($satellite_image->boundaryPoint as $boundary_point) {
@@ -125,8 +126,10 @@ class PageController extends Controller
                         'y' => $boundary_point->y
                     ];
                 }
+                $content['colors'][$satellite_image->id] = $satellite_image->colour;
             }
             $content['map'] = json_encode($content['map']);
+            $content['colors'] = json_encode($content['colors']);
         }
 
 

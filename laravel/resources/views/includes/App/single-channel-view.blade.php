@@ -1,10 +1,7 @@
 <div class="properties">
     <div class="files">
         <div class="file">
-            <div class="title">Зелёный видимый спектр</div>
             <div class="row">
-                <div class="value">qwerty.png</div>
-                <div><a href=""></a>Изменить файл</div>
             </div>
             <form method="POST" action="{{ route('api.projects.satellite_images.upload.single') }}" enctype="multipart/form-data">
                 @csrf

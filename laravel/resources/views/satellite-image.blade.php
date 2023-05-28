@@ -2,8 +2,8 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/CDM/App/pages/satellite-image.css') }}">
-<link rel="stylesheet" href="../../../js/ol/ol.css">
-<script src="{{ asset('js/CDM/App/pages/project.js') }}" type="module"></script>
+@vite(['resources/js/components/map.js'])
+@vite(['resources/css/components/map.css'])
 
 <script>
     var global_value_satellite_image_map_center_x = "{{ $global_value_satellite_image_map_center_x }}";
