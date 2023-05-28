@@ -52,6 +52,8 @@ async def index(
         sql_query_helper.editStateliteImageCenter(satellite_image_id, coordinates)
 
         sql_query_helper.editStateliteImageStatus(satellite_image_id, 'coordinate_calculation')
+        sql_query_helper.checkProjectField(satellite_image_id, coordinates)
+
         return JSONResponse(content={
             'messege': 'Succes',
             'status': True,

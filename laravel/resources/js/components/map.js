@@ -13,14 +13,25 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 
-const coordinates = JSON.parse(global_value_images_coordinates.replace(/&quot;/g, '"'));
-const colors = JSON.parse(global_value_images_colors.replace(/&quot;/g, '"'));
+var coordinates = null;
+var colors = null;
+
+if (typeof global_value_images_coordinates === 'string' && global_value_images_coordinates.trim() !== '') {
+	try {
+	  coordinates = JSON.parse(global_value_images_coordinates.replace(/&quot;/g, '"'));
+	  colors = JSON.parse(global_value_images_colors.replace(/&quot;/g, '"'));
+
+	} catch (error) {
+	  console.error('Ошибка при парсинге JSON-строки:', error);
+	}
+  }
+
 console.log(coordinates);
 console.log(colors);
 
 // Определяем проекцию карты и проекцию данных
-const projectionMap = getProjection('EPSG:32647');
-const projectionData = getProjection('EPSG:32647');
+const projectionMap = getProjection('WGS_1984');
+const projectionData = getProjection('WGS_1984');
 
 const layers = AddPolygon(coordinates, colors);
 
@@ -37,8 +48,8 @@ const map = new Map({
 	target: "map",
 	layers: layers,
 	view: new View({
-		center: fromLonLat([global_value_project_map_center_x, global_value_project_map_center_y]),
-		zoom: 8,
+		center: [global_value_project_map_center_x, global_value_project_map_center_y],
+		zoom: 5,
 		projection: projectionMap,
 	}),
 });
@@ -72,7 +83,7 @@ function AddPolygon(coordinates, colors) {
 					'name': 'EPSG:32647',
 				},
 			},
-			'features': new_element,
+			'features': [new_element],
 		};
 
 		var styles = [

@@ -1,7 +1,9 @@
 import os;
 from osgeo import gdal;
+from osgeo import osr
 import asyncio
 import requests
+import math
 
 from storage import storage_connection
 
@@ -25,48 +27,46 @@ class SingleStateliteImageProcessing:
 
         dataset = gdal.Open(self.local_storage_path + filename)
 
+        coordinates = self.calculate_coordinate(dataset)
+
+        return coordinates
+        
+
+    def calculate_coordinate(self, dataset):
         geotransform = dataset.GetGeoTransform()
+        proj = dataset.GetProjection()
 
-        xsize = dataset.RasterXSize
-        ysize = dataset.RasterYSize
+        print(proj)
 
-        ulx = round(geotransform[0] / 10000, 4) 
-        uly = round(geotransform[3] / 100000, 5)
+        width = dataset.RasterXSize
+        height = dataset.RasterYSize
 
-        urx = round((geotransform[0] + geotransform[1] * xsize) / 10000, 4)
-        ury = uly
-
-        llx = ulx
-        lly = round((geotransform[3] + geotransform[5] * ysize) / 100000, 5)
-
-        lrx = urx
-        lry = lly
-
-        center_x = (ulx + urx + llx + lrx)/4
-        center_y = (uly + ury + lly + lry)/4
-
+        up_left = (
+            round(geotransform[0] + geotransform[1] * 0 + 0 * geotransform[2]),
+            round(geotransform[3] + geotransform[4] * 0 + 0 * geotransform[5])
+            )
+        up_right = (
+            round(geotransform[0] + geotransform[1] * height + 0 * geotransform[2]),
+            round(geotransform[3] + geotransform[4] * height + 0 * geotransform[5])
+            )
+        low_left = (
+            round(geotransform[0] + geotransform[1] * 0 + width * geotransform[2]),
+            round(geotransform[3] + geotransform[4] * 0 + width * geotransform[5])
+            )
+        low_right = (
+            round(geotransform[0] + geotransform[1] * height + width * geotransform[2]),
+            round(geotransform[3] + geotransform[4] * height + width * geotransform[5])
+            )
+        center = (
+            round(geotransform[0] + geotransform[1] * 0.5 + 0.5 * geotransform[2]),
+            round(geotransform[3] + geotransform[4] * 0.5 + 0.5 * geotransform[5])
+            )
+        
         return {
-            'up_left_point' : {
-                'x' : ulx,
-                'y' : uly
-            },
-            'up_right_point': {
-                'x' : urx,
-                'y' : ury
-            },
-            'down_left_point': {
-                'x' : llx,
-                'y' : lly
-            },
-            'down_right_point': {
-                'x' : lrx,
-                'y' : lry
-            },
-            'center_point': {
-                'x' : center_x,
-                'y' : center_y
-            }
+            "up_left_point": {"x": up_left[0], "y": up_left[1]},
+            "up_right_point": {"x": up_right[0], "y": up_right[1]},
+            "low_right_point": {"x": low_right[0], "y": low_right[1]},
+            "low_left_point": {"x": low_left[0], "y": low_left[1]},
+            "center_point": {"x": center[0], "y": center[1]}
         }
-
-    def getWater(self):
-        pass
+        
