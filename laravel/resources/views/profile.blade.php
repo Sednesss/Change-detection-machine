@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profile</title>
-</head>
+@push('styles')
+<!-- <link rel="stylesheet" href="{{ asset('css/CDM/App/pages/create-project.css') }}"> -->
+@endpush
 
-<body>
-    profile
-</body>
+@section('title')
+Профиль
+@endsection
 
-</html>
+@section('content')
+@include('includes.App.page-to-proccessing')
+@endsection

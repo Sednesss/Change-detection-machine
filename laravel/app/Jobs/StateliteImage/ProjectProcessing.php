@@ -10,20 +10,24 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class CalculateCoordinates implements ShouldQueue
+class ProjectProcessing implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $satellite_image_id;
+    protected $project_id;
+    protected $date_start;
+    protected $date_end;
     protected $python_service_url;
     protected $prefix;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($satellite_image_id)
+    public function __construct($project_id, $date_start, $date_end)
     {
-        $this->satellite_image_id = $satellite_image_id;
+        $this->project_id = $project_id;
+        $this->date_start = $date_start;
+        $this->date_end = $date_end;
         $this->python_service_url = env('PYTHON_SERVICE_URL');
     }
 
@@ -32,12 +36,14 @@ class CalculateCoordinates implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->prefix = '/satellite_imagery/coordinate_calculation';
+        $this->prefix = '/project/processing';
 
         $response = Http::timeout(420)->post($this->python_service_url . $this->prefix, [
-            'satellite_image_id' => $this->satellite_image_id
+            'project_id' => $this->project_id,
+            'date_start' => $this->date_start,
+            'date_end' => $this->date_end,
         ]);
 
-        Log::info('Coordinate calculation: ' . $response);
+        Log::info('Project procssing: ' . $response);
     }
 }

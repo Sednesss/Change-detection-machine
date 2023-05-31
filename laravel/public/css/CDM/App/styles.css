@@ -113,3 +113,16 @@
     margin-left: 162px;
     margin-right: 162px;
 }
+
+.page-to-proccessing{
+    margin-top: 15%;
+    text-align: center;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+
+    position: relative;
+    text-decoration: none;
+    color: #454545;
+}

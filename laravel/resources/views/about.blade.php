@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
+@extends('layouts.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>about</title>
-</head>
+@push('styles')
+<!-- <link rel="stylesheet" href="{{ asset('css/CDM/App/pages/create-project.css') }}"> -->
+@endpush
 
-<body>
-    <div id="map"></div>
-</body>
+@section('title')
+О нас
+@endsection
 
-</html>
+@section('content')
+@include('includes.App.page-to-proccessing')
+@endsection

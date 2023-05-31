@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\CDM;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\StateliteImage\ProjectProcessing;
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -46,5 +48,18 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects');
+    }
+
+    public function processing(Request $request)
+    {
+        $project = Project::find($request['id']);
+
+        $project_id = $request['id'];
+        $date_start = $request['date_start'];
+        $date_end = $request['date_end'];
+
+        dispatch(new ProjectProcessing($project_id, $date_start, $date_end));
+
+        return redirect()->route('project', ['slug' => $project->slug]);
     }
 }

@@ -35,4 +35,9 @@ class Project extends Model
     {
         return $this->hasMany(SatelliteImage::class);
     }
+
+    public function resultProcessing()
+    {
+        return $this->hasMany(ResultProcessing::class);
+    }
 }

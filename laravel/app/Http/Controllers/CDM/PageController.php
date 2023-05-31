@@ -39,17 +39,38 @@ class PageController extends Controller
 
     public function about()
     {
-        return view('about');
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        return view('about', $content);
     }
 
     public function connect()
     {
-        return view('connect');
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        return view('connect', $content);
     }
 
     public function rules()
     {
-        return view('rules');
+        $is_auth_user = Auth::check();
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        return view('rules', $content);
     }
 
     public function profile()
@@ -59,7 +80,10 @@ class PageController extends Controller
             return redirect()->route('home');
         }
 
-        return view('profile');
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        return view('profile', $content);
     }
 
     public function projects()
@@ -174,5 +198,21 @@ class PageController extends Controller
 
 
         return view('satellite-image', $content);
+    }
+
+    public function projectResult($slug)
+    {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        $project = Project::where('slug', $slug)->first();
+        $content['project'] = $project;
+
+        return view('project-result', $content);
     }
 }
