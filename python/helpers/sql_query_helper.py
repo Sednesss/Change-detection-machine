@@ -1,3 +1,5 @@
+import json
+
 class SqlQueryHelper:    
     def __init__(self, connection):
         self.connection = connection
@@ -43,7 +45,8 @@ class SqlQueryHelper:
     def checkProjectField(self, satellite_image_id, coordinates):
         self.cursor.execute(f"""SELECT COUNT(*)
         FROM satellite_images
-        WHERE id = {satellite_image_id};""")
+        WHERE project_id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id});
+        """)
         result = self.cursor.fetchall()
 
         if result[0][0] == 1:
@@ -54,12 +57,35 @@ class SqlQueryHelper:
 
             self.cursor.execute(f"""UPDATE projects
             SET status = 'created'
-            WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id})""")
+            WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id});""")
             self.connection.commit()
         elif result[0][0] > 1:
             self.cursor.execute(f"""UPDATE projects
             SET status = 'ready for processing'
-            WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id})""")
+            WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id});""")
             self.connection.commit()
+
+    def addMatrixDataToStateliteImage(self, satellite_image_id, matrix_data):
+        
+        matrix_data = json.dumps(matrix_data.tolist())
+
+        self.cursor.execute(f"""SELECT COUNT(*) FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
+        result = self.cursor.fetchall()
+        
+        if result[0][0] != 0:
+            self.cursor.execute(f"""DELETE FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
+            self.connection.commit()
+
+        self.cursor.execute(f"""INSERT INTO satellite_image_data (satellite_image_id, data, created_at, updated_at) VALUES 
+        ({satellite_image_id}, {matrix_data}, NOW(), NOW());""")
+        self.connection.commit()
+
+    def getProjectFromID(self, project_id):
+        self.cursor.execute(f"""SELECT *
+            FROM projects
+            WHERE id = {project_id};""")
+        result = self.cursor.fetchall()
+        return result
+        
 
         

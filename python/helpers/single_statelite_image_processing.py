@@ -29,14 +29,14 @@ class SingleStateliteImageProcessing:
 
         coordinates = self.calculate_coordinate(dataset)
 
-        return coordinates
+        data = self.getRasterBand(dataset)
+
+        return coordinates, data
         
 
     def calculate_coordinate(self, dataset):
         geotransform = dataset.GetGeoTransform()
         proj = dataset.GetProjection()
-
-        print(proj)
 
         width = dataset.RasterXSize
         height = dataset.RasterYSize
@@ -70,3 +70,8 @@ class SingleStateliteImageProcessing:
             "center_point": {"x": center[0], "y": center[1]}
         }
         
+    def getRasterBand(self, dataset):
+    
+        data = dataset.GetRasterBand(1).ReadAsArray()
+        
+        return data   
