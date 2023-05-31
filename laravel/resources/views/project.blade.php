@@ -7,6 +7,9 @@
 <script>
     var global_value_project_map_center_x = "{{ $global_value_project_map_center_x }}";
     var global_value_project_map_center_y = "{{ $global_value_project_map_center_y }}";
+
+    var global_value_images_coordinates = "{{ $map }}";
+    var global_value_images_colors = "{{ $colors }}";
 </script>
 @endpush
 

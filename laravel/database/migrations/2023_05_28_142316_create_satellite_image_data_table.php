@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('boundary_points', function (Blueprint $table) {
+        Schema::create('satellite_image_data', function (Blueprint $table) {
             $table->id();
-            
+
             $table->bigInteger('satellite_image_id')->unsigned();
             $table->foreign('satellite_image_id')->references('id')->on('satellite_images');
 
-            $table->integer('position');
-            $table->bigInteger('x');
-            $table->bigInteger('y');
-            
+            $table->json('data');
+
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('boundary_points');
+        Schema::dropIfExists('satellite_image_data');
     }
 };

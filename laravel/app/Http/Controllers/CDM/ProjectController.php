@@ -19,8 +19,8 @@ class ProjectController extends Controller
             'name' => $request['name'],
             'slug' => $slug,
             'type' => $request['type'],
-            'map_center_x' => 86.12,
-            'map_center_y' => 70.20
+            'map_center_x' => 2347385,
+            'map_center_y' => 8144115
         ]);
 
         return redirect()->route('project', ['slug' => $slug]);

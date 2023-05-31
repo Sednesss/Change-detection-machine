@@ -16,24 +16,7 @@ def index():
         'status': 'OK'
     }
 
-@router.post('/satellite_imagery_processing', name='image:processing')
-async def index(
-    request_body:SatelliteImageryProcessing = Body(..., embed=True),
-    request_body_qqq:SatelliteImageryProcessing = Body(..., embed=True),
-    db: MySQLConnection = Depends(db_connection)
-    ):
-
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM migrations")
-    result = cursor.fetchall()
-
-    return {
-        'test': 'test',
-        'qwerty': request_body.data,
-        'db': result
-    }
-
-@router.post('/coordinate_calculation', name='image:coordinate')
+@router.post('/satellite_imagery/coordinate_calculation', name='image:coordinate')
 async def index(
     satellite_image_id:int = Body(..., embed=True),
     db: MySQLConnection = Depends(db_connection)
@@ -46,12 +29,16 @@ async def index(
         statelite_image_path = satellite_image_files[0][0]
 
         single_statelite_image_processing = SingleStateliteImageProcessing(statelite_image_path)
-        coordinates = await single_statelite_image_processing.getCoordinate()
+        coordinates, matrix_data = await single_statelite_image_processing.getCoordinate()
 
         sql_query_helper.addBoundaryPointsStateliteImage(satellite_image_id, coordinates)
         sql_query_helper.editStateliteImageCenter(satellite_image_id, coordinates)
 
         sql_query_helper.editStateliteImageStatus(satellite_image_id, 'coordinate_calculation')
+        sql_query_helper.checkProjectField(satellite_image_id, coordinates)
+
+        sql_query_helper.addMatrixDataToStateliteImage(satellite_image_id, matrix_data)
+
         return JSONResponse(content={
             'messege': 'Succes',
             'status': True,
@@ -65,7 +52,47 @@ async def index(
     },
     status_code=500)
 
+@router.post('/satellite_imagery/processing', name='image:processing')
+async def index(
+    satellite_image_id:int = Body(..., embed=True),
+    db: MySQLConnection = Depends(db_connection)
+    ):
 
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM migrations")
+    result = cursor.fetchall()
+
+    return {
+        'test': 'test',
+        'qwerty': satellite_image_id,
+        'db': satellite_image_id
+    }
     
+@router.post('/project/processing', name='project:processing')
+async def index(
+    project_id:int = Body(..., embed=True),
+    date_start:str = Body(..., embed=True),
+    date_end:str = Body(..., embed=True),
+    db: MySQLConnection = Depends(db_connection)
+    ):
 
+    sql_query_helper = SqlQueryHelper(db)
+    project_data = sql_query_helper.getProjectFromID(project_id)
+
+    if True:
+    
+        return JSONResponse(content={
+            'messege': 'Succes',
+            'status': True,
+            'data': project_data
+        })
+    
+    return JSONResponse(content={
+        'messege': 'Bad',
+        'status': False,
+    },
+    status_code=500)
+
+
+  
     

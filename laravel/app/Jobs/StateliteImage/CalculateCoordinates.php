@@ -34,7 +34,7 @@ class CalculateCoordinates implements ShouldQueue
     {
         $this->prefix = '/coordinate_calculation';
 
-        $response = Http::post($this->python_service_url . $this->prefix, [
+        $response = Http::timeout(420)->post($this->python_service_url . $this->prefix, [
             'satellite_image_id' => $this->satellite_image_id
         ]);
 

@@ -20,8 +20,8 @@ class SatelliteImageController extends Controller
             'slug' => $slug,
             'type' => $request['type'],
             'colour' => $colour,
-            'map_center_x' => 86.12,
-            'map_center_y' => 70.20
+            'map_center_x' => 2347385,
+            'map_center_y' => 8144115
         ]);
         $project_slug = $satellite_image->project->slug;
         
