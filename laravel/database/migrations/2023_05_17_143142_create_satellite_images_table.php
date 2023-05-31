@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('status')->default('created');
             $table->string('colour');
-            $table->float('map_center_x')->nullable();
-            $table->float('map_center_y')->nullable();
+            $table->bigInteger('map_center_x')->nullable();
+            $table->bigInteger('map_center_y')->nullable();
         });
     }
 
