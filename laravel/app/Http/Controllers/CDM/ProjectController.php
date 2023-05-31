@@ -52,22 +52,14 @@ class ProjectController extends Controller
 
     public function processing(Request $request)
     {
-        try {
-            $project_id = $request['id'];
-            $date_start = $request['date_start'];
-            $date_end = $request['date_end'];
+        $project = Project::find($request['id']);
 
-            dispatch(new ProjectProcessing($project_id, $date_start, $date_end));
+        $project_id = $request['id'];
+        $date_start = $request['date_start'];
+        $date_end = $request['date_end'];
 
-            return response()->json([
-                'message' => 'Success to start of processing',
-                'success' => true
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Error to start of processing',
-                'success' => false
-            ]);
-        }
+        dispatch(new ProjectProcessing($project_id, $date_start, $date_end));
+
+        return redirect()->route('project', ['slug' => $project->slug]);
     }
 }
