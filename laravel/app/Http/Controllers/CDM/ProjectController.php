@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\CDM;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\StateliteImage\ProjectProcessing;
 use App\Models\Project;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -46,5 +48,26 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects');
+    }
+
+    public function processing(Request $request)
+    {
+        try {
+            $project_id = $request['id'];
+            $date_start = $request['date_start'];
+            $date_end = $request['date_end'];
+
+            dispatch(new ProjectProcessing($project_id, $date_start, $date_end));
+
+            return response()->json([
+                'message' => 'Success to start of processing',
+                'success' => true
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Error to start of processing',
+                'success' => false
+            ]);
+        }
     }
 }

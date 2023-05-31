@@ -16,21 +16,20 @@
     color: #9f9f9f;
 }
 
-.project .project-properties {
-    margin-top: 30px;
-    margin-bottom: 15px;
+.project .project-properties form {
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.project .project-properties .properties-elements {
+.project .project-properties form .properties-elements {
     display: flex;
     flex-direction: column;
 }
 
-.project .project-properties .properties-elements .properties-element {
+.project .project-properties form .properties-elements .properties-element {
     font-family: 'Mont';
     font-style: normal;
     font-weight: 600;
@@ -41,14 +40,14 @@
     flex-direction: column;
 }
 
-.project .project-properties .properties-elements .properties-element .prop{
+.project .project-properties form .properties-elements .properties-element .prop{
     margin-top: 10px;
 
     display: flex;
     flex-direction: row;
 }
 
-.project .project-properties .properties-elements .properties-element .prop label{
+.project .project-properties form .properties-elements .properties-element .prop label{
     margin-right: 5px;
 }
 
@@ -78,9 +77,42 @@
 .project .project-properties .properties-elements .buttons {
     display: flex;
     flex-direction: row;
+    justify-content: right;
+}
+
+.project .project-properties .properties-elements .buttons button {
+    margin-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    margin-left: 8px;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    border-radius: 7px;
+
+    background: #FFFFFF;
+    border: solid #0025B8 1px;
+    color: #0025B8;
+
+    text-decoration: none;
+}
+
+.project .project-properties .properties-elements .buttons button:hover {
+    background: #efefef;
+    border-color: #051a6f;
+    color: #051a6f;
+    transition-duration: 200ms;
+    cursor: pointer;
 }
 
 .project .project-properties .properties-elements .buttons a {
+    margin-bottom: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 18px;
@@ -107,6 +139,7 @@
     border-color: #051a6f;
     color: #051a6f;
     transition-duration: 200ms;
+    cursor: pointer;
 }
 
 .map-section {

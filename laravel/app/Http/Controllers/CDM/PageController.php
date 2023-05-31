@@ -199,4 +199,20 @@ class PageController extends Controller
 
         return view('satellite-image', $content);
     }
+
+    public function projectResult($slug)
+    {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $menu = (new MenuHelper())->getMenu($is_auth_user);
+        $content = $menu;
+
+        $project = Project::where('slug', $slug)->first();
+        $content['project'] = $project;
+
+        return view('project-result', $content);
+    }
 }

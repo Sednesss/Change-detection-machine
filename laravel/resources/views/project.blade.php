@@ -20,38 +20,13 @@
 
 @section('content')
 <div class="project">
-    <div class="project-title">
-        {{ $project->name }}
-    </div>
-    <div class="project-type">
-        [{{ $project->type }}]
-    </div>
-    <div class="project-properties">
-        <div class="properties-elements">
-            <div class="properties-element">
-                <div class="prop">
-                    <label for="start-date">Начальная дата:</label>
-                    <input type="date" id="start-date" name="start-date" min="{{ $global_value_project_data_min ?? '' }}" max="{{ $global_value_project_data_max ?? '' }}" {{ $global_value_project_status == 'creadted' ? 'disabled="disabled"' : '' }}>
-                </div>
-
-                <div class="prop">
-                    <label for="end-date">Конечная дата:</label>
-                    <input type="date" id="end-date" name="end-date" min="{{ $global_value_project_data_min ?? '' }}" max="{{ $global_value_project_data_max ?? '' }}" {{ $global_value_project_status == 'creadted' ? 'disabled="disabled"' : '' }}>
-                </div>
-            </div>
-            <div class="properties-element">
-            </div>
-        </div>
-        <div class="properties-elements">
-            <div class="status">
-                <div class="status-title">Статус:</div>
-                <div class="status-value">{{ $project->status }}</div>
-            </div>
-            <div class="buttons">
-                <a href="">Начать обработку</a>
-            </div>
-        </div>
-    </div>
+    @if($project->status == 'created')
+    @include('includes.App.project.project-created')
+    @elseif($project->status == 'ready for processing')
+    @include('includes.App.project.project-processing-form')
+    @elseif($project->status == 'finished processing')
+    @include('includes.App.project.project-finished')
+    @endif
 </div>
 
 <div class="map-section">

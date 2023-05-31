@@ -1,0 +1,33 @@
+.project .project-title {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 20px;
+    margin-bottom: 15px;
+}
+
+.project .project-type {
+    font-family: 'SFUIDysplay';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 15px;
+    color: #9f9f9f;
+}
+
+.project .result{
+    display: flex;
+    flex-direction: column;
+}
+.project .result .result-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.project .result .result-row .element-title{
+    width: 20%;
+}
+.project .result .result-row .element-value{
+    width: 20%;
+}
