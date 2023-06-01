@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('satellite_image_data', function (Blueprint $table) {
+        Schema::create('channel_emissions_data', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('satellite_image_id')->unsigned();
-            $table->foreign('satellite_image_id')->references('id')->on('satellite_images');
+            $table->bigInteger('channel_emission_id')->unsigned();
+            $table->foreign('channel_emission_id')->references('id')->on('channel_emissions');
 
+            $table->integer('position');
             $table->json('data');
 
             $table->timestamps();
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('satellite_image_data');
+        Schema::dropIfExists('channel_emissions_data');
     }
 };

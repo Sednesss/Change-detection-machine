@@ -65,27 +65,32 @@ class SqlQueryHelper:
             WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id});""")
             self.connection.commit()
 
-    def addMatrixDataToStateliteImage(self, satellite_image_id, matrix_data):
-        
-        matrix_data = json.dumps(matrix_data.tolist())
-
-        self.cursor.execute(f"""SELECT COUNT(*) FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
-        result = self.cursor.fetchall()
-        
-        if result[0][0] != 0:
-            self.cursor.execute(f"""DELETE FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
-            self.connection.commit()
-
-        self.cursor.execute(f"""INSERT INTO satellite_image_data (satellite_image_id, data, created_at, updated_at) VALUES 
-        ({satellite_image_id}, {matrix_data}, NOW(), NOW());""")
-        self.connection.commit()
-
-    def getProjectFromID(self, project_id):
-        self.cursor.execute(f"""SELECT *
-            FROM projects
-            WHERE id = {project_id};""")
+    def getSatelliteImagesIDFromProjectID(self, project_id):
+        self.cursor.execute(f"""SELECT id
+            FROM satellite_images
+            WHERE project_id = {project_id}
+            ORDER BY id ASC;""")
         result = self.cursor.fetchall()
         return result
+
+    def getChennelEmissionPathFromSatelliteImageID(self, satellite_image_id):
+        self.cursor.execute(f"""SELECT path
+            FROM channel_emissions
+            WHERE satellite_image_id = {satellite_image_id}
+            ORDER BY id ASC;""")
+        result = self.cursor.fetchall()
+        return result
+
+    def saveUploadLinkToShapeFile(self, project_id, path_to_file):
+        self.cursor.execute(f"""INSERT INTO result_processings (project_id, link, created_at, updated_at) VALUES 
+        ({project_id}, '{path_to_file}', NOW(), NOW());""")
+        self.connection.commit()
+
+    def editProjectStatus(self, project_id, status):
+        self.cursor.execute(f"""UPDATE projects
+        SET status = '{status}'
+        WHERE id = {project_id};""")
+        self.connection.commit()
         
 
         
