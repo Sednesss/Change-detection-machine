@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Body, Depends
 from fastapi.responses import JSONResponse
+import json
 
 from validation import SatelliteImageryProcessing
 
@@ -37,7 +38,7 @@ async def index(
         sql_query_helper.editStateliteImageStatus(satellite_image_id, 'coordinate_calculation')
         sql_query_helper.checkProjectField(satellite_image_id, coordinates)
 
-        sql_query_helper.addMatrixDataToStateliteImage(satellite_image_id, matrix_data)
+        # sql_query_helper.addMatrixDataToStateliteImage(satellite_image_id, matrix_data)
 
         return JSONResponse(content={
             'messege': 'Succes',
@@ -59,13 +60,13 @@ async def index(
     ):
 
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM migrations")
+    cursor.execute("SELECT * FROM satellite_images")
     result = cursor.fetchall()
 
     return {
         'test': 'test',
         'qwerty': satellite_image_id,
-        'db': satellite_image_id
+        'db': result
     }
     
 @router.post('/project/processing', name='project:processing')

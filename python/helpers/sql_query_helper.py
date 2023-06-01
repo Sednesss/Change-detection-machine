@@ -65,20 +65,26 @@ class SqlQueryHelper:
             WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id});""")
             self.connection.commit()
 
-    def addMatrixDataToStateliteImage(self, satellite_image_id, matrix_data):
-        
-        matrix_data = json.dumps(matrix_data.tolist())
+    # def addMatrixDataToStateliteImage(self, satellite_image_id, matrix_data):
 
-        self.cursor.execute(f"""SELECT COUNT(*) FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
-        result = self.cursor.fetchall()
-        
-        if result[0][0] != 0:
-            self.cursor.execute(f"""DELETE FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
-            self.connection.commit()
+    #     self.cursor.execute(f"""SELECT id FROM channel_emissions WHERE satellite_image_id = {satellite_image_id};""")
+    #     result = self.cursor.fetchall()
 
-        self.cursor.execute(f"""INSERT INTO satellite_image_data (satellite_image_id, data, created_at, updated_at) VALUES 
-        ({satellite_image_id}, {matrix_data}, NOW(), NOW());""")
-        self.connection.commit()
+    #     for channel_emissions in result:
+    #         pass
+
+    #     matrix_data = json.dumps(matrix_data.tolist())
+
+    #     self.cursor.execute(f"""SELECT COUNT(*) FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
+    #     result = self.cursor.fetchall()
+        
+    #     if result[0][0] != 0:
+    #         self.cursor.execute(f"""DELETE FROM satellite_image_data WHERE satellite_image_id = {satellite_image_id};""")
+    #         self.connection.commit()
+
+    #     self.cursor.execute(f"""INSERT INTO satellite_image_data (satellite_image_id, data, created_at, updated_at) VALUES 
+    #     ({satellite_image_id}, {matrix_data}, NOW(), NOW());""")
+    #     self.connection.commit()
 
     def getProjectFromID(self, project_id):
         self.cursor.execute(f"""SELECT *
