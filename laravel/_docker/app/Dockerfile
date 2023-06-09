@@ -18,8 +18,7 @@ RUN apt-get update
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 apt-get install -y nodejs
 
-
-COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
+COPY ./_docker/app/php.ini /usr/local/etc/php/
 COPY ./_docker/app/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 # Install composer
