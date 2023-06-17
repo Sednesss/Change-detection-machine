@@ -31,10 +31,14 @@ async def index(
 
     if len(satellite_image_files) != 0:
         statelite_image_path = satellite_image_files[0][0]
+        original_filename = sql_query_helper.getFilenameFromStateliteImageID(satellite_image_id)[0][0]
+        single_statelite_image_processing = SingleStateliteImageProcessing(statelite_image_path, original_filename)
+        coordinates, coordinate_system, date = await single_statelite_image_processing.getCoordinate()
 
-        single_statelite_image_processing = SingleStateliteImageProcessing(statelite_image_path)
-        coordinates = await single_statelite_image_processing.getCoordinate()
-
+        print(coordinate_system)
+        print(date)
+            
+        sql_query_helper.editDateAndCoordSystemImage(satellite_image_id, date, coordinate_system)
         sql_query_helper.addBoundaryPointsStateliteImage(satellite_image_id, coordinates)
         sql_query_helper.editStateliteImageCenter(satellite_image_id, coordinates)
 

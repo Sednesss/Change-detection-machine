@@ -4,14 +4,17 @@ from osgeo import osr
 import asyncio
 import requests
 import math
+import re
+from datetime import datetime
 
 from storage import storage_connection
 
 
 class SingleStateliteImageProcessing:
-    def __init__(self, satellite_image_path):
+    def __init__(self, satellite_image_path, original_filename):
         self.satellite_image_path = satellite_image_path
         self.local_storage_path_initial = "../storage/initial/"
+        self.original_filename = original_filename
 
         if not os.path.exists(self.local_storage_path_initial):
             os.makedirs(self.local_storage_path_initial)
@@ -30,9 +33,28 @@ class SingleStateliteImageProcessing:
         dataset = gdal.Open(self.local_storage_path_initial + filename)
 
         coordinates = self.calculate_coordinate(dataset)
+        coordinate_system = self.calculate_coordinate_system(dataset)
+        date = self.calculate_date(self.original_filename)
 
-        return coordinates
+        return coordinates, coordinate_system, date
 
+    def calculate_date(self, filename):
+        formatted_date = None
+        try:
+            pattern = re.compile(r"\d{8}")
+            dates = pattern.findall(filename)
+            date = dates[-1]
+            formatted_date = datetime.strptime(date, "%Y%m%d").strftime("%Y-%m-%d %H:%M:%S")
+        except:
+            now = datetime.now()
+            formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+        return formatted_date
+        
+    
+    def calculate_coordinate_system(self, dataset):
+            projection = dataset.GetProjection()
+            return projection
+            
     def calculate_coordinate(self, dataset):
         geotransform = dataset.GetGeoTransform()
         proj = dataset.GetProjection()
