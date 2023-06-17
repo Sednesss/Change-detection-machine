@@ -31,10 +31,11 @@ async def index(
 
     if len(satellite_image_files) != 0:
         statelite_image_path = satellite_image_files[0][0]
-
-        single_statelite_image_processing = SingleStateliteImageProcessing(statelite_image_path)
-        coordinates = await single_statelite_image_processing.getCoordinate()
-
+        original_filename = sql_query_helper.getFilenameFromStateliteImageID(satellite_image_id)[0][0]
+        single_statelite_image_processing = SingleStateliteImageProcessing(statelite_image_path, original_filename)
+        coordinates, coordinate_system, date = await single_statelite_image_processing.getCoordinate()
+            
+        sql_query_helper.editDateAndCoordSystemImage(satellite_image_id, date, coordinate_system)
         sql_query_helper.addBoundaryPointsStateliteImage(satellite_image_id, coordinates)
         sql_query_helper.editStateliteImageCenter(satellite_image_id, coordinates)
 
@@ -81,33 +82,44 @@ async def index(
     sql_query_helper = SqlQueryHelper(db)
     satellite_images_ids = sql_query_helper.getSatelliteImagesIDFromProjectID(project_id)
 
+    shape_file_data = []
     for satellite_images_id in satellite_images_ids:
         channel_emission_paths = sql_query_helper.getChennelEmissionPathFromSatelliteImageID(satellite_images_id[0])
         if len(channel_emission_paths) == 2:
-            
+            original_filename = sql_query_helper.getFilenameFromStateliteImageID(satellite_images_id[0])
             green_path = channel_emission_paths[0][0]
             nir_path = channel_emission_paths[1][0]
 
             # Обработка green
-            proccesing_helper_green = SingleStateliteImageProcessing(green_path)
+            proccesing_helper_green = SingleStateliteImageProcessing(green_path, original_filename)
             green_matrix, geotransform, width, height = await proccesing_helper_green.getRasterBand()
 
             # Обработка nir
-            proccesing_helper_nir = SingleStateliteImageProcessing(nir_path)
+            proccesing_helper_nir = SingleStateliteImageProcessing(nir_path, original_filename)
             nir_matrix, geotransform, width, height = await proccesing_helper_nir.getRasterBand()
             
-            layer_name = str(datetime.datetime.now())
+            # layer_name = str(datetime.datetime.now())
+            layer_name = sql_query_helper.getDateFromStateliteImageID(satellite_images_id[0])[0][0]
 
             parce_helper = ParseMatrix()
             ndwi_matrix = parce_helper.getMatrixNDWI(green_matrix, nir_matrix)
 
-            path_to_file, filename = parce_helper.createAndSaveShapeFileFromNDWIMatrix(ndwi_matrix, geotransform, width, height, layer_name)
-            path_s3_to_file = await parce_helper.storeShapeFile(path_to_file, filename)
-
-            sql_query_helper.saveUploadLinkToShapeFile(project_id, path_s3_to_file)
-            sql_query_helper.editProjectStatus(project_id, 'finished processing')
+            shape_file_data_element = {
+                'ndwi_matrix': ndwi_matrix,
+                'geotransform': geotransform,
+                'width': width,
+                'height': height,
+                'layer_name': layer_name
+            }
+            shape_file_data.append(shape_file_data_element)
         else:
             print('__________channel_emission_path count != 2_____________________')
+            
+    path_to_file, filename = parce_helper.createAndSaveShapeFileFromNDWIMatrix(shape_file_data)
+    path_s3_to_file = await parce_helper.storeShapeFile(path_to_file, filename)
+
+    sql_query_helper.saveUploadLinkToShapeFile(project_id, path_s3_to_file)
+    sql_query_helper.editProjectStatus(project_id, 'finished processing')
 
     if True:
     
