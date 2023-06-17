@@ -5,8 +5,12 @@ namespace App\Http\Controllers\CDM;
 use App\Helpers\App\MenuHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\ResultProcessing;
 use App\Models\SatelliteImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Expr\FuncCall;
 
 class PageController extends Controller
 {
@@ -214,5 +218,35 @@ class PageController extends Controller
         $content['project'] = $project;
 
         return view('project-result', $content);
+    }
+
+    public function projectDownload($slug, $result_id)
+    {
+        $is_auth_user = Auth::check();
+        if (!$is_auth_user) {
+            return redirect()->route('home');
+        }
+
+        $result = ResultProcessing::find($result_id);
+        $link = $result->link;
+
+        $filename = basename($link);
+
+        ob_start();
+
+        $file = Storage::disk('yandex_cloud')->get($link);
+        echo $file;
+
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        $headers = [
+            'Content-Type' => 'application/octet-stream',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        return response()->streamDownload(function () use ($contents) {
+            echo $contents;
+        }, $filename, $headers);
     }
 }
