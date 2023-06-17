@@ -29,6 +29,7 @@ Route::get('/projects/{slug}', [\App\Http\Controllers\CDM\PageController::class,
 Route::get('/projects/{slug}/satellite-images/create', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImageCreate'])->name('projects.images.create');
 Route::get('/projects/{project_slug}/satellite-images/{slug}', [\App\Http\Controllers\CDM\PageController::class, 'satelliteImage'])->name('projects.image');
 Route::get('/projects/{slug}/result', [\App\Http\Controllers\CDM\PageController::class, 'projectResult'])->name('projects.result');
+Route::get('/projects/{slug}/download/{result_id}', [\App\Http\Controllers\CDM\PageController::class, 'projectDownload'])->name('projects.download');
 
 Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
     Route::post('/register', [\App\Http\Controllers\CDM\UserController::class, 'register'])->name('register');

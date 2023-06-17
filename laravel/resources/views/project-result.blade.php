@@ -27,7 +27,7 @@
         <div class="result-row">
             <div class="element-value">{{ $result->created_at }}</div>
             <div class="element-value">
-                <a href="">{{ $result->link }}</a>
+                <a href="{{ route('projects.download', ['slug' => $project->slug, 'result_id' => $result->id]) }}">Скачать</a>
             </div>
         </div>
         @endforeach
