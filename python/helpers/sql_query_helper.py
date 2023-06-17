@@ -106,5 +106,10 @@ class SqlQueryHelper:
         WHERE id = {project_id};""")
         self.connection.commit()
         
-
+    def getDateFromStateliteImageID(self, satellite_image_id):
+        self.cursor.execute(f"""SELECT date
+            FROM satellite_images
+            WHERE id = {satellite_image_id};""")
+        result = self.cursor.fetchall()
+        return result
         
