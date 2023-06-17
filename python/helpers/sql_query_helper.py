@@ -14,6 +14,14 @@ class SqlQueryHelper:
         result = self.cursor.fetchall()
         return result
 
+    def getFilenameFromStateliteImageID(self, satellite_image_id):
+        self.cursor.execute(f"""SELECT filename
+            FROM channel_emissions
+            WHERE satellite_image_id = {satellite_image_id}
+            LIMIT 1;""")
+        result = self.cursor.fetchall()
+        return result
+
     def addBoundaryPointsStateliteImage(self, satellite_image_id, coordinates):
         
         self.cursor.execute(f"""SELECT COUNT(*) FROM boundary_points WHERE satellite_image_id = {satellite_image_id};""")
@@ -65,6 +73,12 @@ class SqlQueryHelper:
             WHERE id = (SELECT project_id FROM satellite_images WHERE id = {satellite_image_id});""")
             self.connection.commit()
 
+    def editDateAndCoordSystemImage(self, satellite_image_id, date, coordinate_system):
+        self.cursor.execute(f"""UPDATE satellite_images
+        SET date = '{date}', coordinate_system = '{coordinate_system}'
+        WHERE id = {satellite_image_id};""")
+        self.connection.commit()
+
     def getSatelliteImagesIDFromProjectID(self, project_id):
         self.cursor.execute(f"""SELECT id
             FROM satellite_images
@@ -92,5 +106,10 @@ class SqlQueryHelper:
         WHERE id = {project_id};""")
         self.connection.commit()
         
-
+    def getDateFromStateliteImageID(self, satellite_image_id):
+        self.cursor.execute(f"""SELECT date
+            FROM satellite_images
+            WHERE id = {satellite_image_id};""")
+        result = self.cursor.fetchall()
+        return result
         
