@@ -19,6 +19,19 @@ class ParseMatrix:
 
     def getMatrixNDWI(self, green_matrix, nir_matrix):
         ndwi_matrix = (green_matrix - nir_matrix) / (green_matrix + nir_matrix)
+
+        print(green_matrix)
+        print(grenir_matrixen_matrix)
+        print('___________test____________')
+
+        print(ndwi_matrix.min())
+        print(ndwi_matrix.max())
+        print(ndwi_matrix.mean())
+        print(ndwi_matrix)
+        print(ndwi_matrix[0][0])
+        print('___________test____________')
+
+
         ndwi_matrix = np.where((ndwi_matrix >= 0.2) & (ndwi_matrix <= 1), 1, 0)
         return ndwi_matrix
 

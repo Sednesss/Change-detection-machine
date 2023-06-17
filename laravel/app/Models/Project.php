@@ -40,4 +40,12 @@ class Project extends Model
     {
         return $this->hasMany(ResultProcessing::class);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function (Project $project) {
+            $project->satelliteImage()->delete();
+            $project->resultProcessing()->delete();
+        });
+    }
 }
