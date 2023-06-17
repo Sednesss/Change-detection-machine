@@ -13,6 +13,15 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 
+import proj4 from 'proj4';
+import {register} from 'ol/proj/proj4';
+
+const string_projection = 'PROJCS["WGS 84 / UTM zone 47N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",99],PARAMETER["scale_factor",0.9996],PARAMETER["false_easting",500000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Easting",EAST],AXIS["Northing",NORTH],AUTHORITY["EPSG","32647"]]'
+const epsg32647 = '+proj=utm +zone=47 +datum=WGS84 +units=m +no_defs';
+proj4.defs('EPSG:32647', string_projection);
+register(proj4);
+const projectionMap = getProjection('EPSG:32647');
+
 var coordinates = null;
 var colors = null;
 
@@ -28,10 +37,6 @@ if (typeof global_value_images_coordinates === 'string' && global_value_images_c
 
 console.log(coordinates);
 console.log(colors);
-
-// Определяем проекцию карты и проекцию данных
-const string_projection = 'PROJCS["WGS 84 / UTM zone 47N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",99],PARAMETER["scale_factor",0.9996],PARAMETER["false_easting",500000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Easting",EAST],AXIS["Northing",NORTH],AUTHORITY["EPSG","32647"]]'
-const projectionMap = getProjection(string_projection);
 
 const layers = AddPolygon(coordinates, colors);
 
@@ -50,7 +55,7 @@ const map = new Map({
 	view: new View({
 		center: [Number(global_value_project_map_center_x), Number(global_value_project_map_center_y)],
 		zoom: 8,
-		projection: projectionMap,
+		// projection: projectionMap,
 	}),
 });
 

@@ -22,4 +22,16 @@ class ChannelEmission extends Model
     {
         return $this->belongsTo(SatelliteImage::class);
     }
+
+    public function channelEmissionData()
+    {
+        return $this->hasMany(ChannelEmissionData::class);
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function (ChannelEmission $channel_emission) {
+            $channel_emission->channelEmissionData()->delete();
+        });
+    }
 }

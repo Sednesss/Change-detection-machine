@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->bigInteger('channel_emission_id')->unsigned();
-            $table->foreign('channel_emission_id')->references('id')->on('channel_emissions');
+            $table->foreign('channel_emission_id')->references('id')->on('channel_emissions')->onDelete('cascade');
 
             $table->integer('position');
             $table->json('data');

@@ -36,4 +36,12 @@ class SatelliteImage extends Model
     {
         return $this->hasMany(ChannelEmission::class);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function (SatelliteImage $satellite_image) {
+            $satellite_image->channelEmission()->delete();
+            $satellite_image->boundaryPoint()->delete();
+        });
+    }
 }

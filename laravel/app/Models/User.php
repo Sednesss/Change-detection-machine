@@ -46,4 +46,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project::class);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function (User $user) {
+            $user->projects()->delete();
+        });
+    }
 }
